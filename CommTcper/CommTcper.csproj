@@ -100,6 +100,10 @@
     <Reference Include="HslCommunication">
       <HintPath>bin\Debug\HslCommunication.dll</HintPath>
     </Reference>
+    <Reference Include="IniHelper1, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\IniHelper1.dll</HintPath>
+    </Reference>
     <Reference Include="Interop.BarTender">
       <HintPath>..\Refs\Interop.BarTender.dll</HintPath>
       <EmbedInteropTypes>True</EmbedInteropTypes>
@@ -124,6 +128,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Allocation.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Allocation.Designer.cs">
+      <DependentUpon>Allocation.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ConfigPath.cs" />
     <Compile Include="Connected Services\SRWeb\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -160,6 +171,9 @@
     <Compile Include="Write.Designer.cs">
       <DependentUpon>Write.cs</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="Allocation.resx">
+      <DependentUpon>Allocation.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Frm_Main.resx">
       <DependentUpon>Frm_Main.cs</DependentUpon>
     </EmbeddedResource>

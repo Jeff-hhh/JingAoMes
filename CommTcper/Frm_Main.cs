@@ -15,6 +15,8 @@ using System.Windows.Forms;
 using ClassLibrary1;
 using Module_PLCCommFast;
 using System.Diagnostics;
+using System.ServiceModel.Configuration;
+using System.Linq;
 
 namespace CommTcper
 {
@@ -110,12 +112,15 @@ namespace CommTcper
             //新增
             _address = "5";
             _dataFormat = cb_DataFormat.Text;
-
-            //  btApp = new BarTender.Application(); ;
+            _userId =IniHelper1.Ini.IniReadValue("[Config]", "Userld");
+            _facilityId= IniHelper1.Ini.IniReadValue("[Config]", "Facilityld");
+            _eqpId= IniHelper1.Ini.IniReadValue("[Config]", "Eqpld");
+            //  btApp = new BarTender.Application(); 
             if (!Directory.Exists(_labelPath))
                 Directory.CreateDirectory(_labelPath);
-            _label_1 = string.Concat(_labelPath, "\\标签1.btw");
-            _label_2 = string.Concat(_labelPath, "\\标签2.btw");
+            _label_1 = string.Concat(_labelPath, IniHelper1.Ini.IniReadValue("[LableModels]", "Mode11"));
+            _label_2 = string.Concat(_labelPath, IniHelper1.Ini.IniReadValue("[LableModels]", "Mode12"));
+            
             if (Init())
             {
                 ShowSerMsg("等待指令");
@@ -148,9 +153,8 @@ namespace CommTcper
                     Thread.Sleep(1000);
                 }
             });
-
         }
-
+       
         //新增PLC客户端
         //异步取消令牌
         private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
@@ -1140,6 +1144,8 @@ namespace CommTcper
             ScanCodeInit();
             ShowMsgScan("重新连接扫码枪");
         }
+
+       
     }
     //public class DataGridViewX : DataGridView
     //{

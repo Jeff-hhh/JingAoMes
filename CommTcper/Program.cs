@@ -20,14 +20,16 @@ namespace CommTcper
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
-                Application.Run(new Frm_Main());
+                //Application.Run(new Frm_Main());
+                Application.Run(new Allocation());
             }
-            else
-            {
-                MessageBox.Show("勿重复打开", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            mutex.ReleaseMutex();
-            
+
+            //else
+            //{
+            //    MessageBox.Show("勿重复打开", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            //}
+            //mutex.ReleaseMutex();
+
         }
     }
 }

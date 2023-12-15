@@ -58,18 +58,18 @@ namespace CommTcper
                 switch (this.cb_mModel.Text)
                 {
                     case "模型1":
-                        IniHelper1.Ini.WriteString("LableModels", "Model1", "\\" + "Model1-1.btw");
-                        IniHelper1.Ini.WriteString("LableModels", "Mode12", "\\" + "Model1-2.btw");
+                        IniHelper1.Ini.WriteString("LableModels", "Model1","Model1-1.btw");
+                        IniHelper1.Ini.WriteString("LableModels", "Mode12", "Model1-2.btw");
                         IniHelper1.Ini.WriteString("LableModels", "SelectMode", "M1");
                         break;
                     case "模型2":
-                        IniHelper1.Ini.WriteString("LableModels", "Model1", "\\"+"Model2-1.btw");
-                        IniHelper1.Ini.WriteString("LableModels", "Mode12", "\\" + "Model2-1.btw");
+                        IniHelper1.Ini.WriteString("LableModels", "Model1", "Model2-1.btw");
+                        IniHelper1.Ini.WriteString("LableModels", "Mode12",  "Model2-1.btw");
                         IniHelper1.Ini.WriteString("LableModels", "SelectMode", "M2");
                         break;
                     case "模型3":
-                        IniHelper1.Ini.WriteString("LableModels", "Model1", "\\" + "Model3-1.btw");
-                        IniHelper1.Ini.WriteString("LableModels", "Mode12", "\\" + "Model3-2.btw");
+                        IniHelper1.Ini.WriteString("LableModels", "Model1",  "Model3-1.btw");
+                        IniHelper1.Ini.WriteString("LableModels", "Mode12",  "Model3-2.btw");
                         IniHelper1.Ini.WriteString("LableModels", "SelectMode", "M3");
                         break;
                 }
@@ -125,7 +125,7 @@ namespace CommTcper
 
             // 获取指定名称的endpoint
             ChannelEndpointElement endpoint = clientSection.Endpoints.Cast<ChannelEndpointElement>()
-                .FirstOrDefault(e => e.Name == "AutoPastingBarcodeServiceHttpPort");
+                .FirstOrDefault(e => e.Name == "JobManagementWebService");
 
             if (endpoint != null)
             {
@@ -137,6 +137,7 @@ namespace CommTcper
 
                 // 触发配置更改
                 ConfigurationManager.RefreshSection("system.serviceModel/client");
+              
             }
         }
         private void bt_mOK_Click(object sender, EventArgs e)

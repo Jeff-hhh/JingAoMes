@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
 using System.Threading;
+using System.Reflection;
 
 namespace CommTcper
 {
@@ -15,20 +16,21 @@ namespace CommTcper
         [STAThread]
         static void Main()
         {
+           
             Mutex mutex = new Mutex(true, "AAA", out _bool);
             if (_bool)
             {
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 Application.Run(new Frm_Main());
-                //Application.Run(new Allocation());
+               
             }
 
-            //else
-            //{
-            //    MessageBox.Show("勿重复打开", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            //}
-            //mutex.ReleaseMutex();
+            else
+            {
+                MessageBox.Show("勿重复打开", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            mutex.ReleaseMutex();
 
         }
     }

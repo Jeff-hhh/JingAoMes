@@ -1,5 +1,4 @@
-﻿using AppComm;
-using AppComm.Entity;
+﻿
 using CommTcper.SRWebJao;
 using LabExpEngine;
 using System;
@@ -17,6 +16,11 @@ using Module_PLCCommFast;
 using System.Diagnostics;
 using System.ServiceModel.Configuration;
 using System.Linq;
+using WebServiceTool;
+using WebServiceTool.AppComm;
+using WebTool.AppComm;
+using System.Reflection;
+using WebServiceTool.AppComm.Enity;
 
 namespace CommTcper
 {
@@ -71,7 +75,7 @@ namespace CommTcper
         ModbusTcp modbusTcp = new ModbusTcp();
         private string _ScanIP { get; set; }
         private string _ScanPort { get; set; }
-     
+
         public Frm_Main()
         {
             InitializeComponent();
@@ -82,19 +86,17 @@ namespace CommTcper
             _currentOrderNo = "";
             btn_qhgd.Enabled = false;
             modbusTcp.PushMsg += ShowMsgScan;
-            ModbusDataReadingLoopAsync();
-
-
+    
         }
-      
+
         private void InitApp()
         {
 
-          
+
             tb_nbstop.Enabled = tb_number.Enabled = tb_number.Enabled = tb_gdh.Enabled = tb_serip.Enabled = tb_serport.Enabled = tb_ptserip.Enabled = tb_ptserport.Enabled = false;
             bt_cancel.Enabled = bt_Rest.Enabled = comboBox1.Enabled = btn_dyjl.Enabled = bt_can.Enabled = btn_qdgd.Enabled = btn_connptser.Enabled = bt_cancel.Enabled = false;
             tb_eqpIdmain.Enabled = tb_facilityIdmian.Enabled = tb_labelModemian.Enabled = tb_urlmian.Enabled = tb_urlmian.Enabled = tb_userldmain.Enabled = false;
-             _save = false;
+            _save = false;
             tb_serip.Text = ConfigurationSettings.AppSettings["SerIP"];
             tb_serport.Text = ConfigurationSettings.AppSettings["SerPort"];
             tb_ptserip.Text = ConfigurationSettings.AppSettings["PtSerIP"];
@@ -116,20 +118,25 @@ namespace CommTcper
             IniHelper1.Ini.path = ConfigPath._config1;
             _address = "5";
             _dataFormat = cb_DataFormat.Text;
-            tb_userldmain.Text= IniHelper1.Ini.IniReadValue("Config", "Userld");
+            tb_userldmain.Text = IniHelper1.Ini.IniReadValue("Config", "Userld");
             tb_eqpIdmain.Text = IniHelper1.Ini.IniReadValue("Config", "Eqpld");
-            tb_facilityIdmian.Text= IniHelper1.Ini.IniReadValue("Config", "Facilityld");
+            tb_facilityIdmian.Text = IniHelper1.Ini.IniReadValue("Config", "Facilityld");
             tb_labelModemian.Text = IniHelper1.Ini.IniReadValue("LableModels", "SelectMode");
-
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             // 获取system.serviceModel节
             ServiceModelSectionGroup serviceModel = ServiceModelSectionGroup.GetSectionGroup(config);
             // 获取客户端节
             ClientSection clientSection = serviceModel.Client;
             ChannelEndpointElement endpoint = clientSection.Endpoints.Cast<ChannelEndpointElement>()
-               .FirstOrDefault(e => e.Name == "AutoPastingBarcodeServiceHttpPort");
-            tb_urlmian.Text = endpoint.Address.ToString();
-
+               .FirstOrDefault(e => e.Name == "JobManagementWebService");
+            if (endpoint != null)
+            {
+                tb_urlmian.Text = endpoint.Address.ToString();
+            }
+            else
+            {
+                ShowSerMsg("节点获取失败！");
+            }
             _facilityId = tb_facilityIdmian.Text;
             _eqpId = tb_eqpIdmain.Text;
             _userId = tb_userldmain.Text;
@@ -138,7 +145,7 @@ namespace CommTcper
                 Directory.CreateDirectory(_labelPath);
             _label_1 = string.Concat(_labelPath, IniHelper1.Ini.IniReadValue("LableModels", "Mode11"));
             _label_2 = string.Concat(_labelPath, IniHelper1.Ini.IniReadValue("LableModels", "Mode12"));
-            
+
             if (Init())
             {
                 ShowSerMsg("等待指令");
@@ -186,22 +193,20 @@ namespace CommTcper
             // 获取客户端节
             ClientSection clientSection = serviceModel.Client;
             ChannelEndpointElement endpoint = clientSection.Endpoints.Cast<ChannelEndpointElement>()
-               .FirstOrDefault(e => e.Name == "AutoPastingBarcodeServiceHttpPort");
+               .FirstOrDefault(e => e.Name == "JobManagementWebService");
             tb_urlmian.Text = endpoint.Address.ToString();
             _labelPath = string.Concat(Application.StartupPath, "\\labels");
             if (!Directory.Exists(_labelPath))
                 Directory.CreateDirectory(_labelPath);
-            _label_1 = string.Concat(_labelPath, IniHelper1.Ini.IniReadValue("LableModels", "Mode11"));
-            _label_2 = string.Concat(_labelPath, IniHelper1.Ini.IniReadValue("LableModels", "Mode12"));
+            _label_1 = string.Concat(_labelPath,"//", IniHelper1.Ini.IniReadValue("LableModels", "Mode11"));
+            _label_2 = string.Concat(_labelPath, "//", IniHelper1.Ini.IniReadValue("LableModels", "Mode12"));
         }
-        
-
         //新增PLC客户端
         //异步取消令牌
         private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
         private async Task ModbusDataReadingLoopAsync()
         {
-             modbusTcp.IP = tb_MoIp.Text;
+            modbusTcp.IP = tb_MoIp.Text;
             modbusTcp.Port = int.Parse(tb_MoPort.Text);
             modbusTcp.DataFormat = (HslCommunication.Core.DataFormat)Enum.Parse(typeof(HslCommunication.Core.DataFormat), _dataFormat);
             modbusTcp.Connect();
@@ -226,19 +231,19 @@ namespace CommTcper
                             ShowMsgScan("上传设备号：" + ConstData.CurrenScanCode);
                             ShowMsgScan("过账流程");
 
-                            // string _postBack = Client.applyForBarcode(new ApbApplyForDTO() { userId = _userId, facilityId = _facilityId, eqpId = _eqpId, lotId = ConstData.CurrenScanCode });
+                            string _postBack = Client.dispatchLotForDC(_facilityId, _userId, _eqpId, ConstData.CurrenScanCode);
 
-                            //    NewGetBarcode getBarcode = CTool.getWorkOrderIdByEqpId(_postBack);
-                            //    if (getBarcode.success)
-                            //    {
-                            //        ShowSerMsg("过账成功," + getBarcodeWork.msg);
-                            //    }
-                            //    else{ShowSerMsg("过账异常," + getBarcodeWork.msg);}
+                            NewGetBarcode getBarcode = CTool.GetBarCode(_postBack);
+                            if (getBarcode.success)
+                            {
+                                ShowSerMsg("过账成功," + getBarcode.msg);
+                            }
+                            else { ShowSerMsg("过账异常," + getBarcode.msg); }
                             ConstData.CurrenScanCode = string.Empty;
                         }
                         else
                         {
-                            ShowMsgScan("扫码枪指令异常"+ ConstData.CurrenScanCode);
+                            ShowMsgScan("扫码枪指令异常" + ConstData.CurrenScanCode);
                         }
                     }
                     await Task.Delay(200); // 轮询200ms
@@ -266,14 +271,10 @@ namespace CommTcper
                     int data = modbusTcp.ReadInt32(_address);
                     return data;
                 });
-
                 return result;
-
-
             }
             catch (Exception ex)
             {
-
                 return -1;
             }
         }
@@ -365,7 +366,7 @@ namespace CommTcper
             bt_cancel.Enabled = true;
             try
             {
-                Init();
+                //Init();
 
                 ShowSerMsg("重新连接中");
                 bt_cancel.Enabled = false;
@@ -517,42 +518,39 @@ namespace CommTcper
                     ////    return;
                     ////}
                     ///
-                    //新增
-                    //string _postBack = Client.applyForBarcode(new ApbApplyForDTO() { userId = _userId, facilityId = _facilityId, eqpId = _eqpId, workOrderId = _currentOrderNo, requestQty = 50 });
+                    //新增(string facilityId, string eqpId, string workOrderId, string userId, int requestQty)
+                    string _postBack = Client.getBarCode(_facilityId, _eqpId, _currentOrderNo, _userId, 1);
 
-                    //NewGetBarcode getBarcode = CTool.GetBarCode(_postBack);
-                    //if (getBarcode.success)
-                    //{
-                    //    if (getBarcode.result == null)
-                    //    {
-                    //        ShowSerMsg("请求失败," + getBarcode.msg);
-                    //    }
-                    //    else
-                    //    {
-                    //        string _guid = Guid.NewGuid().ToString();
-                    //        ShowSerMsg("获取MES条码成功," + getBarcode.msg);
-                    //        IList<string> _ls = (IList<string>)getBarcode.result;
-                    //        foreach (string _sl in _ls)
-                    //        {
-                    //            DbIns.SysDb.ExecuteSql(string.Format("insert into messn(sn,orderno,batchno) values('{0}','{1}','{2}');", _sl, _currentOrderNo, _guid));
-                    //            // DbIns.SysDb.ExecuteSql(string.Format("insert into mesbak(sn,orderno,batchno) values('{0}','{1}','{2}');", _sl, _currentOrderNor, _guid));
+                    NewGetBarcode getBarcode = CTool.GetBarCode(_postBack);
+                    if (getBarcode.success)
+                    {
+                        if (getBarcode.result == null)
+                        {
+                            ShowSerMsg("请求失败," + getBarcode.msg);
+                        }
+                        else
+                        {
+                            string _guid = Guid.NewGuid().ToString();
+                            ShowSerMsg("获取MES条码成功," + getBarcode.msg);
+                            IList<string> _ls = (IList<string>)getBarcode.result;
+                            foreach (string _sl in _ls)
+                            {
+                                DbIns.SysDb.ExecuteSql(string.Format("insert into messn(sn,orderno,batchno) values('{0}','{1}','{2}');", _sl, _currentOrderNo, _guid));
+                                // DbIns.SysDb.ExecuteSql(string.Format("insert into mesbak(sn,orderno,batchno) values('{0}','{1}','{2}');", _sl, _currentOrderNor, _guid));
+                            }
 
-
-                    //        }
-                    //        dt = DbIns.SysDb.ExecuteSql("select * from messn limit 1;").Result as DataTable;
-                    //        if (dt.Rows.Count > 0)
-                    //        {
-                    //            _resMesCode = dt.Rows[0][0].ToString();
-                    //        }
-                    //    }
-
-                    //}
-
-                }
-                if (string.IsNullOrEmpty(_resMesCode))
-                {
-                    ShowSerMsg("取得MES条码异常:暂无可用的条码,请重试");
-                    return;
+                            if (string.IsNullOrEmpty(_resMesCode))
+                            {
+                                ShowSerMsg("取得MES条码异常:暂无可用的条码,请重试");
+                                return;
+                            }
+                            dt = DbIns.SysDb.ExecuteSql("select * from messn limit 1;").Result as DataTable;
+                            if (dt.Rows.Count > 0)
+                            {
+                                _resMesCode = dt.Rows[0][0].ToString();
+                            }
+                        }
+                    }
                 }
 
                 //ConstData.CurrentMesCode = _resMesCode;
@@ -1081,7 +1079,6 @@ namespace CommTcper
 
         private void Frm_Main_Load(object sender, EventArgs e)
         {
-           
             Orderinit();
         }
         //新增
@@ -1126,39 +1123,56 @@ namespace CommTcper
 
 
 
-        ////请求订单号
-        private void button1_Click_1(object sender, EventArgs e)
+        //请求订单号
+        private void bt_Res_Cilck(object sender, EventArgs e)
 
         {
+         
 
-            //    string _postBack = Client.applyForBarcode(new ApbApplyForDTO() { userId = _userId, facilityId = _facilityId, eqpId = _eqpId });
-
-            //    NewGetBarcodeWork getBarcodeWork = CTool.getWorkOrderIdByEqpId(_postBack);
-            //    if (getBarcodeWork.success)
-            //    {
-            //        if (getBarcodeWork.result == null)
-            //        {
-            //            MessageBox.Show("获取MES条码错误," + getBarcodeWork.msg, "通讯程序", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            //            ShowSerMsg("获取MES条码错误," + getBarcodeWork.msg);
-            //            return;
-            //        }
-            //        else
-            //        {
-            //            ShowSerMsg("获取MES条码成功," + getBarcodeWork.msg);
-            //            IList<string> _ls = (IList<string>)getBarcodeWork.result;
-            //            foreach (string _sl in _ls)
-            //            {
-            //                 DbIns.SysDb.ExecuteSql(string.Format("insert into workOrder (workOrderid) values('{0}');", _sl));
-            //
-            //            }
-            //        }
-            //    }
-            IList<string> _ls = new List<string> { "12", "242", "2422" };
-            foreach (string _sl in _ls)
+            try
             {
-                DbIns.SysDb.ExecuteSql(string.Format("insert into workOrder (workOrderid) values('{0}');", _sl));
+               string _postBack = Client.getWorkOrderIdByEqpId(_facilityId, _userId, _eqpId);
+                NewGetBarcodeWork getBarcodeWork = CTool.getWorkOrderIdByEqpId(_postBack);
+                MessageBox.Show(Convert.ToString(getBarcodeWork));
+                if (getBarcodeWork.success)
+                {
+                    if (getBarcodeWork.result == null)
+                    {
+                        MessageBox.Show("获取MES条码错误," + getBarcodeWork.msg, "通讯程序", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ShowSerMsg("获取MES条码错误," + getBarcodeWork.msg);
+                        return;
+                    }
+                    else
+                    {
+                        ShowSerMsg("获取MES单号成功," + getBarcodeWork.msg);
+                        IList<string> _ls = (IList<string>)getBarcodeWork.result;
+                        foreach (string _sl in _ls)
+                        {
+                            DbIns.SysDb.ExecuteSql(string.Format("insert into workOrder (workOrderid) values('{0}');", _sl));
+
+                        }
+                    }
+
+                    Orderinit();
+                }
+                else
+                {
+                    ShowSerMsg("获取MES单号失败," + getBarcodeWork.msg);
+                }
             }
-            Orderinit();
+            catch (Exception s)
+            {
+                MessageBox.Show(Convert.ToString(s));
+            }
+
+
+
+            //    //IList<string> _ls = new List<string> { "12", "242", "2422" };
+            //    //foreach (string _sl in _ls)
+            //    //{
+            //    //    DbIns.SysDb.ExecuteSql(string.Format("insert into workOrder (workOrderid) values('{0}');", _sl));
+            //    //}
+
         }
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -1173,13 +1187,13 @@ namespace CommTcper
                 return;
             }
             _cancellationTokenSource = new CancellationTokenSource();
-             ModbusDataReadingLoopAsync();
+            ModbusDataReadingLoopAsync();
             if (modbusTcp.IsModbusConnect)
             {
                 ShowMsgScan("重新连接PLC成功");
             }
         }
-               
+
 
         private void bt_connScan_Click(object sender, EventArgs e)
         {
@@ -1189,7 +1203,7 @@ namespace CommTcper
 
         private void button1_Click(object sender, EventArgs e)
         {
-            ProcReqCommand("1");
+            //ProcReqCommand("1");
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -1199,10 +1213,7 @@ namespace CommTcper
             allocation.Show();
         }
 
-        private void label21_Click(object sender, EventArgs e)
-        {
 
-        }
     }
     //public class DataGridViewX : DataGridView
     //{
@@ -1218,4 +1229,4 @@ namespace CommTcper
     //        }
     //    }
     //}
-}
+}   

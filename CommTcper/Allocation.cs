@@ -16,7 +16,8 @@ namespace CommTcper
 {
     public partial class Allocation : Form
     {
-
+        public delegate void UpShow();
+        public UpShow upShow;
         public Allocation()
         {
             InitializeComponent();
@@ -143,7 +144,9 @@ namespace CommTcper
             bool _bool = Write();
             if (_bool)
             {
+                upShow.Invoke();
                 MessageBox.Show("保存成功");
+               
                 AppconfigUrl();
                 Close();
             }

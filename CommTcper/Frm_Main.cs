@@ -71,6 +71,7 @@ namespace CommTcper
         ModbusTcp modbusTcp = new ModbusTcp();
         private string _ScanIP { get; set; }
         private string _ScanPort { get; set; }
+     
         public Frm_Main()
         {
             InitializeComponent();
@@ -85,14 +86,15 @@ namespace CommTcper
 
 
         }
-
+      
         private void InitApp()
         {
 
-
+          
             tb_nbstop.Enabled = tb_number.Enabled = tb_number.Enabled = tb_gdh.Enabled = tb_serip.Enabled = tb_serport.Enabled = tb_ptserip.Enabled = tb_ptserport.Enabled = false;
             bt_cancel.Enabled = bt_Rest.Enabled = comboBox1.Enabled = btn_dyjl.Enabled = bt_can.Enabled = btn_qdgd.Enabled = btn_connptser.Enabled = bt_cancel.Enabled = false;
-            _save = false;
+            tb_eqpIdmain.Enabled = tb_facilityIdmian.Enabled = tb_labelModemian.Enabled = tb_urlmian.Enabled = tb_urlmian.Enabled = tb_userldmain.Enabled = false;
+             _save = false;
             tb_serip.Text = ConfigurationSettings.AppSettings["SerIP"];
             tb_serport.Text = ConfigurationSettings.AppSettings["SerPort"];
             tb_ptserip.Text = ConfigurationSettings.AppSettings["PtSerIP"];
@@ -110,16 +112,32 @@ namespace CommTcper
             _labelPath = string.Concat(Application.StartupPath, "\\labels");
             _queue_1 = new Queue();
             //新增
+            ConfigPath.Path();
+            IniHelper1.Ini.path = ConfigPath._config1;
             _address = "5";
             _dataFormat = cb_DataFormat.Text;
-            _userId =IniHelper1.Ini.IniReadValue("[Config]", "Userld");
-            _facilityId= IniHelper1.Ini.IniReadValue("[Config]", "Facilityld");
-            _eqpId= IniHelper1.Ini.IniReadValue("[Config]", "Eqpld");
+            tb_userldmain.Text= IniHelper1.Ini.IniReadValue("Config", "Userld");
+            tb_eqpIdmain.Text = IniHelper1.Ini.IniReadValue("Config", "Eqpld");
+            tb_facilityIdmian.Text= IniHelper1.Ini.IniReadValue("Config", "Facilityld");
+            tb_labelModemian.Text = IniHelper1.Ini.IniReadValue("LableModels", "SelectMode");
+
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            // 获取system.serviceModel节
+            ServiceModelSectionGroup serviceModel = ServiceModelSectionGroup.GetSectionGroup(config);
+            // 获取客户端节
+            ClientSection clientSection = serviceModel.Client;
+            ChannelEndpointElement endpoint = clientSection.Endpoints.Cast<ChannelEndpointElement>()
+               .FirstOrDefault(e => e.Name == "AutoPastingBarcodeServiceHttpPort");
+            tb_urlmian.Text = endpoint.Address.ToString();
+
+            _facilityId = tb_facilityIdmian.Text;
+            _eqpId = tb_eqpIdmain.Text;
+            _userId = tb_userldmain.Text;
             //  btApp = new BarTender.Application(); 
             if (!Directory.Exists(_labelPath))
                 Directory.CreateDirectory(_labelPath);
-            _label_1 = string.Concat(_labelPath, IniHelper1.Ini.IniReadValue("[LableModels]", "Mode11"));
-            _label_2 = string.Concat(_labelPath, IniHelper1.Ini.IniReadValue("[LableModels]", "Mode12"));
+            _label_1 = string.Concat(_labelPath, IniHelper1.Ini.IniReadValue("LableModels", "Mode11"));
+            _label_2 = string.Concat(_labelPath, IniHelper1.Ini.IniReadValue("LableModels", "Mode12"));
             
             if (Init())
             {
@@ -154,7 +172,30 @@ namespace CommTcper
                 }
             });
         }
-       
+        private void Up_Show()
+        {
+            ConfigPath.Path();
+            IniHelper1.Ini.path = ConfigPath._config1;
+            tb_userldmain.Text = IniHelper1.Ini.IniReadValue("Config", "Userld");
+            tb_eqpIdmain.Text = IniHelper1.Ini.IniReadValue("Config", "Eqpld");
+            tb_facilityIdmian.Text = IniHelper1.Ini.IniReadValue("Config", "Facilityld");
+            tb_labelModemian.Text = IniHelper1.Ini.IniReadValue("LableModels", "SelectMode");
+            Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+            // 获取system.serviceModel节
+            ServiceModelSectionGroup serviceModel = ServiceModelSectionGroup.GetSectionGroup(config);
+            // 获取客户端节
+            ClientSection clientSection = serviceModel.Client;
+            ChannelEndpointElement endpoint = clientSection.Endpoints.Cast<ChannelEndpointElement>()
+               .FirstOrDefault(e => e.Name == "AutoPastingBarcodeServiceHttpPort");
+            tb_urlmian.Text = endpoint.Address.ToString();
+            _labelPath = string.Concat(Application.StartupPath, "\\labels");
+            if (!Directory.Exists(_labelPath))
+                Directory.CreateDirectory(_labelPath);
+            _label_1 = string.Concat(_labelPath, IniHelper1.Ini.IniReadValue("LableModels", "Mode11"));
+            _label_2 = string.Concat(_labelPath, IniHelper1.Ini.IniReadValue("LableModels", "Mode12"));
+        }
+        
+
         //新增PLC客户端
         //异步取消令牌
         private CancellationTokenSource _cancellationTokenSource = new CancellationTokenSource();
@@ -1145,7 +1186,22 @@ namespace CommTcper
             ShowMsgScan("重新连接扫码枪");
         }
 
-       
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ProcReqCommand("1");
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            Allocation allocation = new Allocation();
+            allocation.upShow += Up_Show;
+            allocation.Show();
+        }
+
+        private void label21_Click(object sender, EventArgs e)
+        {
+
+        }
     }
     //public class DataGridViewX : DataGridView
     //{

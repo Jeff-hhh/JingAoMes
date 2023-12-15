@@ -23,8 +23,7 @@ namespace CommTcper
             {
                 _config1 = string.Concat(_config, "\\config.ini");
             }
-           
-
         }
+        
     }
 }

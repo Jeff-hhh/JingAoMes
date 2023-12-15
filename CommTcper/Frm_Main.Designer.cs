@@ -68,7 +68,6 @@
             this.label21 = new System.Windows.Forms.Label();
             this.tb_labelModemian = new System.Windows.Forms.TextBox();
             this.button2 = new System.Windows.Forms.Button();
-            this.bt_Rest = new System.Windows.Forms.Button();
             this.label20 = new System.Windows.Forms.Label();
             this.label19 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
@@ -78,7 +77,9 @@
             this.tb_eqpIdmain = new System.Windows.Forms.TextBox();
             this.tb_userldmain = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
             this.bt_save = new System.Windows.Forms.Button();
+            this.bt_Rest = new System.Windows.Forms.Button();
             this.label9 = new System.Windows.Forms.Label();
             this.tb_number = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -89,6 +90,8 @@
             this.label11 = new System.Windows.Forms.Label();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.label22 = new System.Windows.Forms.Label();
+            this.tb_address = new System.Windows.Forms.TextBox();
             this.cb_DataFormat = new System.Windows.Forms.ComboBox();
             this.label16 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
@@ -101,7 +104,6 @@
             this.tb_MoIp = new System.Windows.Forms.TextBox();
             this.bt_connScan = new System.Windows.Forms.Button();
             this.bt_connMo = new System.Windows.Forms.Button();
-            this.label5 = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -122,9 +124,9 @@
             this.groupBox1.Controls.Add(this.tb_sermsg);
             this.groupBox1.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox1.Location = new System.Drawing.Point(39, 238);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(509, 246);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
@@ -133,7 +135,7 @@
             // bt_cancel
             // 
             this.bt_cancel.Location = new System.Drawing.Point(350, 24);
-            this.bt_cancel.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bt_cancel.Margin = new System.Windows.Forms.Padding(2);
             this.bt_cancel.Name = "bt_cancel";
             this.bt_cancel.Size = new System.Drawing.Size(116, 26);
             this.bt_cancel.TabIndex = 4;
@@ -144,7 +146,7 @@
             // tb_serport
             // 
             this.tb_serport.Location = new System.Drawing.Point(266, 26);
-            this.tb_serport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_serport.Margin = new System.Windows.Forms.Padding(2);
             this.tb_serport.Name = "tb_serport";
             this.tb_serport.Size = new System.Drawing.Size(62, 23);
             this.tb_serport.TabIndex = 3;
@@ -163,7 +165,7 @@
             // tb_serip
             // 
             this.tb_serip.Location = new System.Drawing.Point(52, 26);
-            this.tb_serip.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_serip.Margin = new System.Windows.Forms.Padding(2);
             this.tb_serip.Name = "tb_serip";
             this.tb_serip.Size = new System.Drawing.Size(155, 23);
             this.tb_serip.TabIndex = 1;
@@ -184,7 +186,7 @@
             this.tb_sermsg.BackColor = System.Drawing.SystemColors.MenuText;
             this.tb_sermsg.ForeColor = System.Drawing.Color.Lime;
             this.tb_sermsg.Location = new System.Drawing.Point(15, 54);
-            this.tb_sermsg.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_sermsg.Margin = new System.Windows.Forms.Padding(2);
             this.tb_sermsg.Multiline = true;
             this.tb_sermsg.Name = "tb_sermsg";
             this.tb_sermsg.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -201,9 +203,9 @@
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Font = new System.Drawing.Font("微软雅黑", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.groupBox2.Location = new System.Drawing.Point(39, 492);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(509, 258);
             this.groupBox2.TabIndex = 1;
             this.groupBox2.TabStop = false;
@@ -214,7 +216,7 @@
             this.tb_ptsermsg.BackColor = System.Drawing.SystemColors.MenuText;
             this.tb_ptsermsg.ForeColor = System.Drawing.Color.AliceBlue;
             this.tb_ptsermsg.Location = new System.Drawing.Point(15, 54);
-            this.tb_ptsermsg.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_ptsermsg.Margin = new System.Windows.Forms.Padding(2);
             this.tb_ptsermsg.Multiline = true;
             this.tb_ptsermsg.Name = "tb_ptsermsg";
             this.tb_ptsermsg.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -224,7 +226,7 @@
             // btn_connptser
             // 
             this.btn_connptser.Location = new System.Drawing.Point(350, 26);
-            this.btn_connptser.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_connptser.Margin = new System.Windows.Forms.Padding(2);
             this.btn_connptser.Name = "btn_connptser";
             this.btn_connptser.Size = new System.Drawing.Size(116, 26);
             this.btn_connptser.TabIndex = 6;
@@ -235,7 +237,7 @@
             // tb_ptserport
             // 
             this.tb_ptserport.Location = new System.Drawing.Point(266, 28);
-            this.tb_ptserport.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_ptserport.Margin = new System.Windows.Forms.Padding(2);
             this.tb_ptserport.Name = "tb_ptserport";
             this.tb_ptserport.Size = new System.Drawing.Size(62, 23);
             this.tb_ptserport.TabIndex = 5;
@@ -254,7 +256,7 @@
             // tb_ptserip
             // 
             this.tb_ptserip.Location = new System.Drawing.Point(52, 28);
-            this.tb_ptserip.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_ptserip.Margin = new System.Windows.Forms.Padding(2);
             this.tb_ptserip.Name = "tb_ptserip";
             this.tb_ptserip.Size = new System.Drawing.Size(155, 23);
             this.tb_ptserip.TabIndex = 3;
@@ -288,7 +290,7 @@
             this.tb_prtgamsg.BackColor = System.Drawing.SystemColors.MenuText;
             this.tb_prtgamsg.ForeColor = System.Drawing.Color.Lime;
             this.tb_prtgamsg.Location = new System.Drawing.Point(9, 50);
-            this.tb_prtgamsg.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_prtgamsg.Margin = new System.Windows.Forms.Padding(2);
             this.tb_prtgamsg.Multiline = true;
             this.tb_prtgamsg.Name = "tb_prtgamsg";
             this.tb_prtgamsg.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -311,7 +313,7 @@
             this.bt_can.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.bt_can.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.bt_can.Location = new System.Drawing.Point(564, 80);
-            this.bt_can.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.bt_can.Margin = new System.Windows.Forms.Padding(2);
             this.bt_can.Name = "bt_can";
             this.bt_can.Size = new System.Drawing.Size(118, 52);
             this.bt_can.TabIndex = 12;
@@ -324,7 +326,7 @@
             this.btn_qdgd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_qdgd.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn_qdgd.Location = new System.Drawing.Point(438, 82);
-            this.btn_qdgd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_qdgd.Margin = new System.Windows.Forms.Padding(2);
             this.btn_qdgd.Name = "btn_qdgd";
             this.btn_qdgd.Size = new System.Drawing.Size(118, 52);
             this.btn_qdgd.TabIndex = 11;
@@ -337,7 +339,7 @@
             this.btn_qhgd.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_qhgd.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn_qhgd.Location = new System.Drawing.Point(710, 82);
-            this.btn_qhgd.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_qhgd.Margin = new System.Windows.Forms.Padding(2);
             this.btn_qhgd.Name = "btn_qhgd";
             this.btn_qhgd.Size = new System.Drawing.Size(118, 52);
             this.btn_qhgd.TabIndex = 10;
@@ -359,7 +361,7 @@
             // tb_gdh
             // 
             this.tb_gdh.Location = new System.Drawing.Point(166, 210);
-            this.tb_gdh.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_gdh.Margin = new System.Windows.Forms.Padding(2);
             this.tb_gdh.Name = "tb_gdh";
             this.tb_gdh.Size = new System.Drawing.Size(157, 21);
             this.tb_gdh.TabIndex = 8;
@@ -383,7 +385,7 @@
             this.btn_dyjl.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
             this.btn_dyjl.Font = new System.Drawing.Font("微软雅黑", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btn_dyjl.Location = new System.Drawing.Point(302, 80);
-            this.btn_dyjl.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_dyjl.Margin = new System.Windows.Forms.Padding(2);
             this.btn_dyjl.Name = "btn_dyjl";
             this.btn_dyjl.Size = new System.Drawing.Size(118, 52);
             this.btn_dyjl.TabIndex = 18;
@@ -440,7 +442,7 @@
             this.tb_prtgbmsg.BackColor = System.Drawing.SystemColors.MenuText;
             this.tb_prtgbmsg.ForeColor = System.Drawing.Color.Aqua;
             this.tb_prtgbmsg.Location = new System.Drawing.Point(0, 54);
-            this.tb_prtgbmsg.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_prtgbmsg.Margin = new System.Windows.Forms.Padding(2);
             this.tb_prtgbmsg.Multiline = true;
             this.tb_prtgbmsg.Name = "tb_prtgbmsg";
             this.tb_prtgbmsg.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
@@ -538,32 +540,21 @@
             // tb_labelModemian
             // 
             this.tb_labelModemian.Location = new System.Drawing.Point(461, 154);
-            this.tb_labelModemian.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_labelModemian.Margin = new System.Windows.Forms.Padding(2);
             this.tb_labelModemian.Name = "tb_labelModemian";
             this.tb_labelModemian.Size = new System.Drawing.Size(76, 21);
             this.tb_labelModemian.TabIndex = 31;
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(850, 94);
-            this.button2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button2.Location = new System.Drawing.Point(850, 82);
+            this.button2.Margin = new System.Windows.Forms.Padding(2);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(56, 18);
+            this.button2.Size = new System.Drawing.Size(56, 19);
             this.button2.TabIndex = 30;
             this.button2.Text = "修改配置";
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
-            // bt_Rest
-            // 
-            this.bt_Rest.Location = new System.Drawing.Point(1174, 210);
-            this.bt_Rest.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.bt_Rest.Name = "bt_Rest";
-            this.bt_Rest.Size = new System.Drawing.Size(106, 38);
-            this.bt_Rest.TabIndex = 21;
-            this.bt_Rest.Text = "请求单号";
-            this.bt_Rest.UseVisualStyleBackColor = true;
-            this.bt_Rest.Click += new System.EventHandler(this.bt_Res_Cilck);
             // 
             // label20
             // 
@@ -608,7 +599,7 @@
             // tb_urlmian
             // 
             this.tb_urlmian.Location = new System.Drawing.Point(606, 154);
-            this.tb_urlmian.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_urlmian.Margin = new System.Windows.Forms.Padding(2);
             this.tb_urlmian.Name = "tb_urlmian";
             this.tb_urlmian.Size = new System.Drawing.Size(282, 21);
             this.tb_urlmian.TabIndex = 25;
@@ -616,7 +607,7 @@
             // tb_facilityIdmian
             // 
             this.tb_facilityIdmian.Location = new System.Drawing.Point(183, 154);
-            this.tb_facilityIdmian.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_facilityIdmian.Margin = new System.Windows.Forms.Padding(2);
             this.tb_facilityIdmian.Name = "tb_facilityIdmian";
             this.tb_facilityIdmian.Size = new System.Drawing.Size(76, 21);
             this.tb_facilityIdmian.TabIndex = 24;
@@ -624,7 +615,7 @@
             // tb_eqpIdmain
             // 
             this.tb_eqpIdmain.Location = new System.Drawing.Point(317, 150);
-            this.tb_eqpIdmain.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_eqpIdmain.Margin = new System.Windows.Forms.Padding(2);
             this.tb_eqpIdmain.Name = "tb_eqpIdmain";
             this.tb_eqpIdmain.Size = new System.Drawing.Size(76, 21);
             this.tb_eqpIdmain.TabIndex = 23;
@@ -632,21 +623,34 @@
             // tb_userldmain
             // 
             this.tb_userldmain.Location = new System.Drawing.Point(52, 150);
-            this.tb_userldmain.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_userldmain.Margin = new System.Windows.Forms.Padding(2);
             this.tb_userldmain.Name = "tb_userldmain";
             this.tb_userldmain.Size = new System.Drawing.Size(76, 21);
             this.tb_userldmain.TabIndex = 22;
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(850, 116);
-            this.button1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.button1.Location = new System.Drawing.Point(850, 110);
+            this.button1.Margin = new System.Windows.Forms.Padding(2);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(55, 16);
+            this.button1.Size = new System.Drawing.Size(56, 19);
             this.button1.TabIndex = 21;
-            this.button1.Text = "MesRest";
+            this.button1.Text = "Mes重新";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // label5
+            // 
+            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.label5.Font = new System.Drawing.Font("微软雅黑", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label5.Location = new System.Drawing.Point(0, 0);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(1255, 52);
+            this.label5.TabIndex = 20;
+            this.label5.Text = "                                                      鑫本智能MES系统（正式版本）            " +
+    "                                                                   ";
+            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
             // 
             // bt_save
             // 
@@ -660,6 +664,17 @@
             this.bt_save.Text = "保存";
             this.bt_save.UseVisualStyleBackColor = true;
             this.bt_save.Click += new System.EventHandler(this.bt_save_Click);
+            // 
+            // bt_Rest
+            // 
+            this.bt_Rest.Location = new System.Drawing.Point(1174, 210);
+            this.bt_Rest.Margin = new System.Windows.Forms.Padding(2);
+            this.bt_Rest.Name = "bt_Rest";
+            this.bt_Rest.Size = new System.Drawing.Size(106, 38);
+            this.bt_Rest.TabIndex = 21;
+            this.bt_Rest.Text = "请求单号";
+            this.bt_Rest.UseVisualStyleBackColor = true;
+            this.bt_Rest.Click += new System.EventHandler(this.bt_Res_Cilck);
             // 
             // label9
             // 
@@ -675,7 +690,7 @@
             // tb_number
             // 
             this.tb_number.Location = new System.Drawing.Point(480, 214);
-            this.tb_number.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_number.Margin = new System.Windows.Forms.Padding(2);
             this.tb_number.Name = "tb_number";
             this.tb_number.Size = new System.Drawing.Size(116, 21);
             this.tb_number.TabIndex = 23;
@@ -695,7 +710,7 @@
             // tb_nbstop
             // 
             this.tb_nbstop.Location = new System.Drawing.Point(749, 210);
-            this.tb_nbstop.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_nbstop.Margin = new System.Windows.Forms.Padding(2);
             this.tb_nbstop.Name = "tb_nbstop";
             this.tb_nbstop.Size = new System.Drawing.Size(119, 21);
             this.tb_nbstop.TabIndex = 25;
@@ -705,10 +720,10 @@
             // 
             this.groupBox6.Controls.Add(this.tb_Scan);
             this.groupBox6.Location = new System.Drawing.Point(990, 502);
-            this.groupBox6.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox6.Size = new System.Drawing.Size(350, 246);
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox6.Size = new System.Drawing.Size(334, 246);
             this.groupBox6.TabIndex = 26;
             this.groupBox6.TabStop = false;
             this.groupBox6.Text = "MES过账信息显示";
@@ -717,19 +732,19 @@
             // 
             this.tb_Scan.BackColor = System.Drawing.SystemColors.MenuText;
             this.tb_Scan.ForeColor = System.Drawing.Color.Lime;
-            this.tb_Scan.Location = new System.Drawing.Point(4, 34);
-            this.tb_Scan.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.tb_Scan.Location = new System.Drawing.Point(4, 44);
+            this.tb_Scan.Margin = new System.Windows.Forms.Padding(2);
             this.tb_Scan.Multiline = true;
             this.tb_Scan.Name = "tb_Scan";
             this.tb_Scan.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.tb_Scan.Size = new System.Drawing.Size(330, 196);
+            this.tb_Scan.Size = new System.Drawing.Size(311, 186);
             this.tb_Scan.TabIndex = 7;
             // 
             // comboBox1
             // 
             this.comboBox1.FormattingEnabled = true;
             this.comboBox1.Location = new System.Drawing.Point(1036, 218);
-            this.comboBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.comboBox1.Margin = new System.Windows.Forms.Padding(2);
             this.comboBox1.Name = "comboBox1";
             this.comboBox1.Size = new System.Drawing.Size(110, 20);
             this.comboBox1.TabIndex = 27;
@@ -754,6 +769,8 @@
             // 
             // groupBox7
             // 
+            this.groupBox7.Controls.Add(this.label22);
+            this.groupBox7.Controls.Add(this.tb_address);
             this.groupBox7.Controls.Add(this.cb_DataFormat);
             this.groupBox7.Controls.Add(this.label16);
             this.groupBox7.Controls.Add(this.label15);
@@ -775,6 +792,22 @@
             this.groupBox7.TabStop = false;
             this.groupBox7.Text = "groupBox7";
             // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Location = new System.Drawing.Point(24, 107);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(77, 12);
+            this.label22.TabIndex = 14;
+            this.label22.Text = "寄存器地址：";
+            // 
+            // tb_address
+            // 
+            this.tb_address.Location = new System.Drawing.Point(107, 104);
+            this.tb_address.Name = "tb_address";
+            this.tb_address.Size = new System.Drawing.Size(120, 21);
+            this.tb_address.TabIndex = 13;
+            // 
             // cb_DataFormat
             // 
             this.cb_DataFormat.FormattingEnabled = true;
@@ -783,17 +816,17 @@
             "ABCD",
             "BADC",
             "DCBA"});
-            this.cb_DataFormat.Location = new System.Drawing.Point(106, 90);
+            this.cb_DataFormat.Location = new System.Drawing.Point(107, 76);
             this.cb_DataFormat.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cb_DataFormat.Name = "cb_DataFormat";
             this.cb_DataFormat.Size = new System.Drawing.Size(121, 20);
             this.cb_DataFormat.TabIndex = 12;
-            this.cb_DataFormat.Text = "CDAB";
+            this.cb_DataFormat.Text = "BADC";
             // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(31, 94);
+            this.label16.Location = new System.Drawing.Point(31, 84);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(53, 12);
             this.label16.TabIndex = 11;
@@ -820,7 +853,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(31, 60);
+            this.label13.Location = new System.Drawing.Point(31, 54);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(41, 12);
             this.label13.TabIndex = 7;
@@ -855,7 +888,7 @@
             // 
             // tb_MoPort
             // 
-            this.tb_MoPort.Location = new System.Drawing.Point(106, 60);
+            this.tb_MoPort.Location = new System.Drawing.Point(107, 51);
             this.tb_MoPort.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tb_MoPort.Name = "tb_MoPort";
             this.tb_MoPort.Size = new System.Drawing.Size(121, 21);
@@ -893,19 +926,6 @@
             this.bt_connMo.UseVisualStyleBackColor = true;
             this.bt_connMo.Click += new System.EventHandler(this.bt_connMo_Click);
             // 
-            // label5
-            // 
-            this.label5.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.label5.Font = new System.Drawing.Font("微软雅黑", 21.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.label5.Location = new System.Drawing.Point(0, 0);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(1255, 52);
-            this.label5.TabIndex = 20;
-            this.label5.Text = "                                                      鑫本智能MES系统（正式版本）            " +
-    "                                                                   ";
-            this.label5.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            // 
             // Frm_Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -931,11 +951,11 @@
             this.Controls.Add(this.tb_gdh);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "Frm_Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "通讯程序-测试";
+            this.Text = "通讯程序";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Frm_Main_FormClosing);
             this.Load += new System.EventHandler(this.Frm_Main_Load);
             this.SizeChanged += new System.EventHandler(this.Frm_Main_SizeChanged);
@@ -1033,6 +1053,8 @@
         private System.Windows.Forms.Label label21;
         private System.Windows.Forms.TextBox tb_labelModemian;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.TextBox tb_address;
     }
 }
 

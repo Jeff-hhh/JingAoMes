@@ -86,16 +86,15 @@ namespace CommTcper
             _currentOrderNo = "";
             btn_qhgd.Enabled = false;
             modbusTcp.PushMsg += ShowMsgScan;
-    
+            ModbusDataReadingLoopAsync();
         }
 
         private void InitApp()
         {
-
-
             tb_nbstop.Enabled = tb_number.Enabled = tb_number.Enabled = tb_gdh.Enabled = tb_serip.Enabled = tb_serport.Enabled = tb_ptserip.Enabled = tb_ptserport.Enabled = false;
             bt_cancel.Enabled = bt_Rest.Enabled = comboBox1.Enabled = btn_dyjl.Enabled = bt_can.Enabled = btn_qdgd.Enabled = btn_connptser.Enabled = bt_cancel.Enabled = false;
             tb_eqpIdmain.Enabled = tb_facilityIdmian.Enabled = tb_labelModemian.Enabled = tb_urlmian.Enabled = tb_urlmian.Enabled = tb_userldmain.Enabled = false;
+            button2.Enabled = button1.Enabled = tb_address.Enabled = tb_MoIp.Enabled = tb_MoPort.Enabled = tb_ScanIp.Enabled = tb_ScanPort.Enabled = cb_DataFormat.Enabled = false;
             _save = false;
             tb_serip.Text = ConfigurationSettings.AppSettings["SerIP"];
             tb_serport.Text = ConfigurationSettings.AppSettings["SerPort"];
@@ -116,8 +115,8 @@ namespace CommTcper
             //新增
             ConfigPath.Path();
             IniHelper1.Ini.path = ConfigPath._config1;
-            _address = "5";
             _dataFormat = cb_DataFormat.Text;
+            tb_address.Text = IniHelper1.Ini.IniReadValue("Modbus", "Address");
             tb_userldmain.Text = IniHelper1.Ini.IniReadValue("Config", "Userld");
             tb_eqpIdmain.Text = IniHelper1.Ini.IniReadValue("Config", "Eqpld");
             tb_facilityIdmian.Text = IniHelper1.Ini.IniReadValue("Config", "Facilityld");
@@ -137,15 +136,15 @@ namespace CommTcper
             {
                 ShowSerMsg("节点获取失败！");
             }
+            _address = tb_address.Text;
             _facilityId = tb_facilityIdmian.Text;
             _eqpId = tb_eqpIdmain.Text;
             _userId = tb_userldmain.Text;
             //  btApp = new BarTender.Application(); 
             if (!Directory.Exists(_labelPath))
                 Directory.CreateDirectory(_labelPath);
-            _label_1 = string.Concat(_labelPath, IniHelper1.Ini.IniReadValue("LableModels", "Mode11"));
-            _label_2 = string.Concat(_labelPath, IniHelper1.Ini.IniReadValue("LableModels", "Mode12"));
-
+            _label_1 = string.Concat(_labelPath, "\\", IniHelper1.Ini.IniReadValue("LableModels", "Model1"));
+            _label_2 = string.Concat(_labelPath, "\\", IniHelper1.Ini.IniReadValue("LableModels", "Model2"));
             if (Init())
             {
                 ShowSerMsg("等待指令");
@@ -187,6 +186,11 @@ namespace CommTcper
             tb_eqpIdmain.Text = IniHelper1.Ini.IniReadValue("Config", "Eqpld");
             tb_facilityIdmian.Text = IniHelper1.Ini.IniReadValue("Config", "Facilityld");
             tb_labelModemian.Text = IniHelper1.Ini.IniReadValue("LableModels", "SelectMode");
+            tb_address.Text = IniHelper1.Ini.IniReadValue("Modbus", "Address");
+            _address = tb_address.Text;
+            _facilityId = tb_facilityIdmian.Text;
+            _eqpId = tb_eqpIdmain.Text;
+            _userId = tb_userldmain.Text;
             Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
             // 获取system.serviceModel节
             ServiceModelSectionGroup serviceModel = ServiceModelSectionGroup.GetSectionGroup(config);
@@ -198,8 +202,8 @@ namespace CommTcper
             _labelPath = string.Concat(Application.StartupPath, "\\labels");
             if (!Directory.Exists(_labelPath))
                 Directory.CreateDirectory(_labelPath);
-            _label_1 = string.Concat(_labelPath,"//", IniHelper1.Ini.IniReadValue("LableModels", "Mode11"));
-            _label_2 = string.Concat(_labelPath, "//", IniHelper1.Ini.IniReadValue("LableModels", "Mode12"));
+            _label_1 = string.Concat(_labelPath, "//", IniHelper1.Ini.IniReadValue("LableModels", "Model1"));
+            _label_2 = string.Concat(_labelPath, "//", IniHelper1.Ini.IniReadValue("LableModels", "Model2"));
         }
         //新增PLC客户端
         //异步取消令牌
@@ -221,29 +225,28 @@ namespace CommTcper
                         _cancellationTokenSource.Cancel();
                         modbusTcp.IsModbusConnect = false;
                         ShowMsgScan("PLC连接异常");
-                        return;
+
                     }
                     if (data == 1)
                     {
                         modbusTcp.WriteInt(_address, 0);
-                        if (string.IsNullOrEmpty(ConstData.CurrenScanCode)) //过账流程
+                        if (!string.IsNullOrEmpty(ConstData.CurrenScanCode)) //过账流程
                         {
-                            ShowMsgScan("上传设备号：" + ConstData.CurrenScanCode);
-                            ShowMsgScan("过账流程");
+                            ShowMsgScan("过账成功:");
+                            //string _postBack = Client.dispatchLotForDC(_facilityId, _userId, _eqpId, ConstData.CurrenScanCode);
 
-                            string _postBack = Client.dispatchLotForDC(_facilityId, _userId, _eqpId, ConstData.CurrenScanCode);
-
-                            NewGetBarcode getBarcode = CTool.GetBarCode(_postBack);
-                            if (getBarcode.success)
-                            {
-                                ShowSerMsg("过账成功," + getBarcode.msg);
-                            }
-                            else { ShowSerMsg("过账异常," + getBarcode.msg); }
+                            //NewGetBarcode getBarcode = CTool.GetBarCode(_postBack);
+                            //if (getBarcode.success)
+                            //{
+                            //    ShowMsgScan("过账成功:" + getBarcode.msg);
+                            //}
+                            //else { ShowMsgScan("过账异常:" + getBarcode.msg); }
                             ConstData.CurrenScanCode = string.Empty;
                         }
                         else
                         {
                             ShowMsgScan("扫码枪指令异常" + ConstData.CurrenScanCode);
+
                         }
                     }
                     await Task.Delay(200); // 轮询200ms
@@ -520,13 +523,14 @@ namespace CommTcper
                     ///
                     //新增(string facilityId, string eqpId, string workOrderId, string userId, int requestQty)
                     string _postBack = Client.getBarCode(_facilityId, _eqpId, _currentOrderNo, _userId, 1);
-
                     NewGetBarcode getBarcode = CTool.GetBarCode(_postBack);
+
                     if (getBarcode.success)
                     {
                         if (getBarcode.result == null)
                         {
                             ShowSerMsg("请求失败," + getBarcode.msg);
+                            return;
                         }
                         else
                         {
@@ -559,22 +563,28 @@ namespace CommTcper
                 //时间戳
                 TimeSpan ts2 = new TimeSpan(DateTime.Now.Ticks);
                 TimeSpan ts3 = ts2.Subtract(ts1).Duration();
-
-                //ShowSerMsg(string.Concat("分", ts3.Minutes, "秒", ts3.Seconds));
-                ////打印机1
-                //BarTender.Format btFormatPrint = btApp.Formats.Open(_label_1, false, string.Empty);
-                //btFormatPrint.PrintSetup.Printer = _printer_1;
-                ////btFormatPrint.PrintSetup.NumberSerializedLabels = 1;                
-                //btFormatPrint.PrintSetup.IdenticalCopiesOfLabel = 1;
-                //btFormatPrint.SetNamedSubStringValue("sn", _resMesCode);
-                //btFormatPrint.PrintOut(false, false);
-                ////打印机2
-                //BarTender.Format btFormatPrint2 = btApp.Formats.Open(_label_2, false, string.Empty);
-                //btFormatPrint2.PrintSetup.Printer = _printer_2;
-                ////btFormatPrint.PrintSetup.NumberSerializedLabels = 1;                
-                //btFormatPrint2.PrintSetup.IdenticalCopiesOfLabel = 1;
-                //btFormatPrint2.SetNamedSubStringValue("sn", _resMesCode);
-                //btFormatPrint2.PrintOut(false, false);
+                try
+                {
+                    //ShowSerMsg(string.Concat("分", ts3.Minutes, "秒", ts3.Seconds));
+                    ////打印机1
+                    //BarTender.Format btFormatPrint = btApp.Formats.Open(_label_1, false, string.Empty);
+                    //btFormatPrint.PrintSetup.Printer = _printer_1;
+                    ////btFormatPrint.PrintSetup.NumberSerializedLabels = 1;                
+                    //btFormatPrint.PrintSetup.IdenticalCopiesOfLabel = 1;
+                    //btFormatPrint.SetNamedSubStringValue("sn", _resMesCode);
+                    //btFormatPrint.PrintOut(false, false);
+                    ////打印机2
+                    //BarTender.Format btFormatPrint2 = btApp.Formats.Open(_label_2, false, string.Empty);
+                    //btFormatPrint2.PrintSetup.Printer = _printer_2;
+                    ////btFormatPrint.PrintSetup.NumberSerializedLabels = 1;                
+                    //btFormatPrint2.PrintSetup.IdenticalCopiesOfLabel = 1;
+                    //btFormatPrint2.SetNamedSubStringValue("sn", _resMesCode);
+                    //btFormatPrint2.PrintOut(false, false);
+                }
+                catch(Exception e)
+                {
+                    ShowPtSerMsg(Convert.ToString(e));
+                }
 
                 Thread.Sleep(50);
 
@@ -648,12 +658,18 @@ namespace CommTcper
                     ShowSerMsg("未找到上次发送的条码");
                     return;
                 }
-
-                BarTender.Format btFormatPrint = btApp.Formats.Open(_label_1, false, string.Empty);
-
-                btFormatPrint.PrintSetup.Printer = _printer_1;
-                btFormatPrint.SetNamedSubStringValue("sn", ConstData.CurrentMesCode);
-                btFormatPrint.PrintOut(false, false);
+                try
+                {
+                    BarTender.Format btFormatPrint = btApp.Formats.Open(_label_1, false, string.Empty);
+                    btFormatPrint.PrintSetup.Printer = _printer_1;
+                    btFormatPrint.SetNamedSubStringValue("sn", ConstData.CurrentMesCode);
+                    btFormatPrint.PrintOut(false, false);
+                }
+                catch(Exception e)
+                {
+                    ShowPtSerMsg(Convert.ToString(e));
+                }
+               
 
                 Thread.Sleep(50);
 
@@ -682,13 +698,21 @@ namespace CommTcper
                     ShowSerMsg("未找到上次发送的条码");
                     return;
                 }
+                try
+                {
+                    BarTender.Format btFormatPrint2 = btApp.Formats.Open(_label_2, false, string.Empty);
+                    btFormatPrint2.PrintSetup.Printer = _printer_2;
+                    //btFormatPrint.PrintSetup.NumberSerializedLabels = 1;                
+                    btFormatPrint2.PrintSetup.IdenticalCopiesOfLabel = 1;
+                    btFormatPrint2.SetNamedSubStringValue("sn", ConstData.CurrentMesCode);
+                    btFormatPrint2.PrintOut(false, false);
 
-                BarTender.Format btFormatPrint2 = btApp.Formats.Open(_label_2, false, string.Empty);
-                btFormatPrint2.PrintSetup.Printer = _printer_2;
-                //btFormatPrint.PrintSetup.NumberSerializedLabels = 1;                
-                btFormatPrint2.PrintSetup.IdenticalCopiesOfLabel = 1;
-                btFormatPrint2.SetNamedSubStringValue("sn", ConstData.CurrentMesCode);
-                btFormatPrint2.PrintOut(false, false);
+                }
+                catch(Exception e)
+                {
+                    ShowPtSerMsg(Convert.ToString(e));
+                }
+
 
                 Thread.Sleep(50);
 
@@ -931,22 +955,6 @@ namespace CommTcper
                     DbIns.SysDb.ExecuteSql("delete from workOrder where workOrderid='" + _currentOrderNo + "';");
                     Orderinit();
 
-                    //  string _postBack = Client.applyForBarcode(new ApbApplyForDTO() { userId = _userId, facilityId = _facilityId, eqpId = _eqpId, workOrderId = ConstData.WorckOrder });
-
-                    //    NewGetBarcodeWork getBarcodeWork = CTool.getWorkOrderIdByEqpId(_postBack);
-                    //    if (getBarcodeWork.success)
-                    //    {
-                    //        if (!getBarcodeWork.msg.Equals("取消投批成功"))
-                    //        {
-                    //            MessageBox.Show("获取MES条码错误," + getBarcodeWork.msg, "通讯程序", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    //            ShowSerMsg("获取MES条码错误," + getBarcodeWork.msg);
-                    //            return;
-                    //        }
-                    //        else
-                    //        {
-                    //            ShowSerMsg("取消成功," + getBarcodeWork.msg);
-                    // DbIns.SysDb.ExecuteSql("delete from messn;");
-                    //        }
                 }
 
                 //lb_yz.Text = "0";
@@ -1056,7 +1064,7 @@ namespace CommTcper
             if (pm.ShowDialog() == DialogResult.OK)
             {
                 tb_serip.Enabled = tb_serport.Enabled = tb_ptserip.Enabled = tb_ptserport.Enabled = false;
-                bt_Rest.Enabled = btn_qdgd.Enabled = btn_connptser.Enabled = btn_dyjl.Enabled = true;
+                button2.Enabled = button1.Enabled = bt_Rest.Enabled = btn_qdgd.Enabled = btn_connptser.Enabled = btn_dyjl.Enabled = true;
                 comboBox1.Enabled = tb_nbstop.Enabled = tb_number.Enabled = tb_number.Enabled = tb_gdh.Enabled = true;
                 bt_dlu.BackColor = System.Drawing.Color.Green;
             }
@@ -1071,12 +1079,11 @@ namespace CommTcper
                 return;
             }
             comboBox1.Enabled = bt_Rest.Enabled = tb_nbstop.Enabled = tb_number.Enabled = tb_gdh.Enabled = tb_serip.Enabled = tb_serport.Enabled = tb_ptserip.Enabled = tb_ptserport.Enabled = false;
-            bt_can.Enabled = comboBox1.Enabled = btn_dyjl.Enabled = bt_can.Enabled = btn_qdgd.Enabled = btn_connptser.Enabled = bt_cancel.Enabled = false;
+            button2.Enabled = button1.Enabled = bt_can.Enabled = comboBox1.Enabled = btn_dyjl.Enabled = bt_can.Enabled = btn_qdgd.Enabled = btn_connptser.Enabled = bt_cancel.Enabled = false;
             bt_dlu.BackColor = System.Drawing.Color.Transparent;
             Class2.__result = false;
 
         }
-
         private void Frm_Main_Load(object sender, EventArgs e)
         {
             Orderinit();
@@ -1120,26 +1127,21 @@ namespace CommTcper
 
             }
         }
-
-
-
         //请求订单号
         private void bt_Res_Cilck(object sender, EventArgs e)
 
         {
-         
-
             try
             {
-               string _postBack = Client.getWorkOrderIdByEqpId(_facilityId, _userId, _eqpId);
+                string _postBack = Client.getWorkOrderIdByEqpId(_facilityId, _userId, _eqpId);
                 NewGetBarcodeWork getBarcodeWork = CTool.getWorkOrderIdByEqpId(_postBack);
                 MessageBox.Show(Convert.ToString(getBarcodeWork));
                 if (getBarcodeWork.success)
                 {
                     if (getBarcodeWork.result == null)
                     {
-                        MessageBox.Show("获取MES条码错误," + getBarcodeWork.msg, "通讯程序", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        ShowSerMsg("获取MES条码错误," + getBarcodeWork.msg);
+                        MessageBox.Show("获取MES单号错误," + getBarcodeWork.msg, "通讯程序", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        ShowSerMsg("获取MES单号错误," + getBarcodeWork.msg);
                         return;
                     }
                     else
@@ -1229,4 +1231,4 @@ namespace CommTcper
     //        }
     //    }
     //}
-}   
+}

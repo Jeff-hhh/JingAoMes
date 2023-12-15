@@ -28,18 +28,6 @@ namespace CommTcper
             ConfigPath.Path();
             IniHelper1.Ini.path = ConfigPath._config1;
             Reder();
-            //Configuration config = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
-
-            //// 获取system.serviceModel节
-            //ServiceModelSectionGroup serviceModel = ServiceModelSectionGroup.GetSectionGroup(config);
-
-            //// 获取客户端节
-            //ClientSection clientSection = serviceModel.Client;
-            //ChannelEndpointElement endpoint = clientSection.Endpoints.Cast<ChannelEndpointElement>()
-            //   .FirstOrDefault(e => e.Name == "AutoPastingBarcodeServiceHttpPort");
-            //this.tb_url.Text = endpoint.Address.ToString();
-
-
         }
         private bool Write()
         {
@@ -55,6 +43,7 @@ namespace CommTcper
                 IniHelper1.Ini.WriteString("Config", "Userld", this.tb_mUserld.Text);
                 IniHelper1.Ini.WriteString("Config", "Facilityld", this.tb_mFacilityld.Text);
                 IniHelper1.Ini.WriteString("Config", "Eqpld", this.tb_mEqpld.Text);
+                IniHelper1.Ini.WriteString("Modbus", "Address",this.tb_address.Text);
                 switch (this.cb_mModel.Text)
                 {
                     case "模型1":
@@ -96,6 +85,7 @@ namespace CommTcper
             this.tb_mUserld.Text = IniHelper1.Ini.IniReadValue("Config", "Userld");
             this.tb_mFacilityld.Text = IniHelper1.Ini.IniReadValue("Config", "Facilityld");
             this.tb_mEqpld.Text = IniHelper1.Ini.IniReadValue("Config", "Eqpld");
+            this.tb_address.Text = IniHelper1.Ini.IniReadValue("Modbus", "Address");
             string str = IniHelper1.Ini.IniReadValue("LableModels", "SelectMode");
             switch (str)
             {

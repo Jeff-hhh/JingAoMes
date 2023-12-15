@@ -1,6 +1,6 @@
 ﻿using AppComm;
 using AppComm.Entity;
-using CommTcper.SRWeb;
+using CommTcper.SRWebJao;
 using LabExpEngine;
 using System;
 using System.Collections;
@@ -46,7 +46,7 @@ namespace CommTcper
         private string _webServiceUri { get; set; }
         private bool _save { get; set; }
         private int _synumber { get; set; }
-        private AutoPastingBarcodeServicePortTypeClient Client { get; set; }
+        private JobManagementWebServiceClient Client { get; set; }
 
         //新增
         /// <summary>
@@ -78,7 +78,7 @@ namespace CommTcper
             CheckForIllegalCrossThreadCalls = false;
             //dgv_sytm = new DataGridViewX();
             InitApp();
-            Client = new AutoPastingBarcodeServicePortTypeClient();
+            Client = new JobManagementWebServiceClient();
             _currentOrderNo = "";
             btn_qhgd.Enabled = false;
             modbusTcp.PushMsg += ShowMsgScan;
@@ -555,28 +555,28 @@ namespace CommTcper
                     return;
                 }
 
-                ConstData.CurrentMesCode = _resMesCode;
+                //ConstData.CurrentMesCode = _resMesCode;
 
-                ShowSerMsg("取得MES条码:" + _resMesCode + ",动作:打印条码");
+                //ShowSerMsg("取得MES条码:" + _resMesCode + ",动作:打印条码");
                 //时间戳
                 TimeSpan ts2 = new TimeSpan(DateTime.Now.Ticks);
                 TimeSpan ts3 = ts2.Subtract(ts1).Duration();
 
-                ShowSerMsg(string.Concat("分", ts3.Minutes, "秒", ts3.Seconds));
-                //打印机1
-                BarTender.Format btFormatPrint = btApp.Formats.Open(_label_1, false, string.Empty);
-                btFormatPrint.PrintSetup.Printer = _printer_1;
-                //btFormatPrint.PrintSetup.NumberSerializedLabels = 1;                
-                btFormatPrint.PrintSetup.IdenticalCopiesOfLabel = 1;
-                btFormatPrint.SetNamedSubStringValue("sn", _resMesCode);
-                btFormatPrint.PrintOut(false, false);
-                //打印机2
-                BarTender.Format btFormatPrint2 = btApp.Formats.Open(_label_2, false, string.Empty);
-                btFormatPrint2.PrintSetup.Printer = _printer_2;
-                //btFormatPrint.PrintSetup.NumberSerializedLabels = 1;                
-                btFormatPrint2.PrintSetup.IdenticalCopiesOfLabel = 1;
-                btFormatPrint2.SetNamedSubStringValue("sn", _resMesCode);
-                btFormatPrint2.PrintOut(false, false);
+                //ShowSerMsg(string.Concat("分", ts3.Minutes, "秒", ts3.Seconds));
+                ////打印机1
+                //BarTender.Format btFormatPrint = btApp.Formats.Open(_label_1, false, string.Empty);
+                //btFormatPrint.PrintSetup.Printer = _printer_1;
+                ////btFormatPrint.PrintSetup.NumberSerializedLabels = 1;                
+                //btFormatPrint.PrintSetup.IdenticalCopiesOfLabel = 1;
+                //btFormatPrint.SetNamedSubStringValue("sn", _resMesCode);
+                //btFormatPrint.PrintOut(false, false);
+                ////打印机2
+                //BarTender.Format btFormatPrint2 = btApp.Formats.Open(_label_2, false, string.Empty);
+                //btFormatPrint2.PrintSetup.Printer = _printer_2;
+                ////btFormatPrint.PrintSetup.NumberSerializedLabels = 1;                
+                //btFormatPrint2.PrintSetup.IdenticalCopiesOfLabel = 1;
+                //btFormatPrint2.SetNamedSubStringValue("sn", _resMesCode);
+                //btFormatPrint2.PrintOut(false, false);
 
                 Thread.Sleep(50);
 
@@ -1081,6 +1081,7 @@ namespace CommTcper
 
         private void Frm_Main_Load(object sender, EventArgs e)
         {
+           
             Orderinit();
         }
         //新增

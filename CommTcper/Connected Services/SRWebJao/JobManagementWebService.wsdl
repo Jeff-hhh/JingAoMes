@@ -1,0 +1,1527 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:intf="http://xml.fa-software.com/mycim/wsdd/" xmlns:apachesoap="http://xml.apache.org/xml-soap" xmlns:wsdlsoap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:impl="http://xml.fa-software.com/mycim/wsdd/" targetNamespace="http://xml.fa-software.com/mycim/wsdd/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types />
+  <wsdl:message name="saveZKAiLineInfoRequest">
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="eqptId" type="soapenc:string" />
+    <wsdl:part name="lotId" type="soapenc:string" />
+    <wsdl:part name="user" type="soapenc:string" />
+    <wsdl:part name="reasonDetail" type="soapenc:string" />
+    <wsdl:part name="reasonType" type="soapenc:string" />
+    <wsdl:part name="dateTime" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="saveWMSReturnMaterialsInfoRequest">
+    <wsdl:part name="transData" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="getWorkOrderInfoForSCHResponse">
+    <wsdl:part name="getWorkOrderInfoForSCHReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="rejectMaterialsByErpOrderNumberRequest">
+    <wsdl:part name="orderNumber" type="soapenc:string" />
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="userId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateLotExtRequest">
+    <wsdl:part name="specialCode" type="soapenc:string" />
+    <wsdl:part name="lotRrn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="transferMatForWmsRequest">
+    <wsdl:part name="wmsDatas" type="soapenc:string" />
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="transUser" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="getPalletLocationResponse">
+    <wsdl:part name="getPalletLocationReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="dispatchLotResponse">
+    <wsdl:part name="dispatchLotReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="qryJobListByEquipResponse">
+    <wsdl:part name="qryJobListByEquipReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="bindingMaterialsByErpOrderNumberRequest">
+    <wsdl:part name="orderNumber" type="soapenc:string" />
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="userId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="recordeElInfoResponse">
+    <wsdl:part name="recordeElInfoReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="getModuleInformationResponse">
+    <wsdl:part name="getModuleInformationReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="lotCuringRoomNoticeResponse">
+    <wsdl:part name="lotCuringRoomNoticeReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="dispatchLotForDCResponse">
+    <wsdl:part name="dispatchLotForDCReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="agvCheckMaterialOneRequest">
+    <wsdl:part name="lineId" type="soapenc:string" />
+    <wsdl:part name="shiftId" type="soapenc:string" />
+    <wsdl:part name="itemType" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="EAPbindingMaterialInterfaceRequest">
+    <wsdl:part name="eqptId" type="soapenc:string" />
+    <wsdl:part name="workOrderId" type="soapenc:string" />
+    <wsdl:part name="itemId" type="soapenc:string" />
+    <wsdl:part name="lotNumber" type="soapenc:string" />
+    <wsdl:part name="qty" type="soapenc:string" />
+    <wsdl:part name="supplierId" type="soapenc:string" />
+    <wsdl:part name="facilityId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="RequestBoxInfoResponse">
+    <wsdl:part name="RequestBoxInfoReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="getWorkOrderIdByEqpIdResponse">
+    <wsdl:part name="getWorkOrderIdByEqpIdReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="GeyPalletInFoByExcelResponse">
+    <wsdl:part name="GeyPalletInFoByExcelReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="getLotInfoRequest">
+    <wsdl:part name="lotId" type="soapenc:string" />
+    <wsdl:part name="equipRrn" type="soapenc:long" />
+    <wsdl:part name="userRrn" type="soapenc:long" />
+    <wsdl:part name="facilityRrn" type="soapenc:long" />
+  </wsdl:message>
+  <wsdl:message name="geteapglassidResponse">
+    <wsdl:part name="geteapglassidReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="getWorkOrderListByAgvRequest">
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="eqptId" type="soapenc:string" />
+    <wsdl:part name="itemId" type="soapenc:string" />
+    <wsdl:part name="lotNumber" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="EAPneedMaterialInterfaceRequest">
+    <wsdl:part name="eqptId" type="soapenc:string" />
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="callItemType" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="getWorkOrderIdByEqpIdRequest">
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="userId" type="soapenc:string" />
+    <wsdl:part name="eqpId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="dispatchCancelPostingResponse">
+    <wsdl:part name="dispatchCancelPostingReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="GeyPalletInFoByExcelRequest">
+    <wsdl:part name="palletListString" type="soapenc:string" />
+    <wsdl:part name="rowmum" type="xsd:long" />
+    <wsdl:part name="num" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="dispatchLotForLamRequest">
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="userId" type="soapenc:string" />
+    <wsdl:part name="eqipId" type="soapenc:string" />
+    <wsdl:part name="lotIds" type="soapenc:string" />
+    <wsdl:part name="transData" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="FindLotExtByLotIDResponse">
+    <wsdl:part name="FindLotExtByLotIDReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="dispatchLotForDCRequest">
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="userId" type="soapenc:string" />
+    <wsdl:part name="eqipId" type="soapenc:string" />
+    <wsdl:part name="lotId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="RequestPalletInfoResponse">
+    <wsdl:part name="RequestPalletInfoReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="dispatchLotForCyRequest">
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="userId" type="soapenc:string" />
+    <wsdl:part name="lotId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMarkInfoDTRequest">
+    <wsdl:part name="palletId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="dispatchLotForLuRequest">
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="userId" type="soapenc:string" />
+    <wsdl:part name="eqipId" type="soapenc:string" />
+    <wsdl:part name="lotIds" type="soapenc:string" />
+    <wsdl:part name="transData" type="soapenc:string" />
+    <wsdl:part name="weldereqpId" type="soapenc:string" />
+    <wsdl:part name="mertialId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="checkPrintFlagResponse">
+    <wsdl:part name="checkPrintFlagReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="withStandVoltageRequest">
+    <wsdl:part name="data" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="getEqpInfoRequest">
+    <wsdl:part name="userId" type="soapenc:string" />
+    <wsdl:part name="equipId" type="soapenc:string" />
+    <wsdl:part name="facilityRrn" type="soapenc:long" />
+  </wsdl:message>
+  <wsdl:message name="getNameplateInformationRequest">
+    <wsdl:part name="orderId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="FailStorePalletRequest">
+    <wsdl:part name="palletId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="getEqpInfoResponse">
+    <wsdl:part name="getEqpInfoReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="getElTransInfoRequest">
+    <wsdl:part name="lotId" type="soapenc:string" />
+    <wsdl:part name="eqptId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="GetELImagebyPalletRequest">
+    <wsdl:part name="PalletListString" type="soapenc:string" />
+    <wsdl:part name="rowmum" type="xsd:long" />
+    <wsdl:part name="chkLAMB" type="xsd:boolean" />
+    <wsdl:part name="chkLAMA" type="xsd:boolean" />
+    <wsdl:part name="chkIV" type="xsd:boolean" />
+    <wsdl:part name="chkLAMAVI" type="xsd:boolean" />
+    <wsdl:part name="chkLAMBVI" type="xsd:boolean" />
+    <wsdl:part name="chkJXH" type="xsd:boolean" />
+    <wsdl:part name="DataType" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="getBarCodeRequest">
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="eqpId" type="soapenc:string" />
+    <wsdl:part name="workOrderId" type="soapenc:string" />
+    <wsdl:part name="userId" type="soapenc:string" />
+    <wsdl:part name="requestQty" type="xsd:int" />
+  </wsdl:message>
+  <wsdl:message name="GetLotBasicInfoResponse">
+    <wsdl:part name="GetLotBasicInfoReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="dispatchforNorthVIResponse">
+    <wsdl:part name="dispatchforNorthVIReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="generalUploadInterfaceRequest">
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="lineId" type="soapenc:string" />
+    <wsdl:part name="eqptId" type="soapenc:string" />
+    <wsdl:part name="transType" type="soapenc:string" />
+    <wsdl:part name="lotId" type="soapenc:string" />
+    <wsdl:part name="decisionResult" type="soapenc:string" />
+    <wsdl:part name="transData" type="soapenc:string" />
+    <wsdl:part name="attr1" type="soapenc:string" />
+    <wsdl:part name="attr2" type="soapenc:string" />
+    <wsdl:part name="attr3" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="getNameplateInformationResponse">
+    <wsdl:part name="getNameplateInformationReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="loginRequest">
+    <wsdl:part name="userName" type="soapenc:string" />
+    <wsdl:part name="password" type="soapenc:string" />
+    <wsdl:part name="facilityId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="lotCuringRoomNoticeRequest">
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="lotId" type="soapenc:string" />
+    <wsdl:part name="area" type="soapenc:string" />
+    <wsdl:part name="type" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="bindingMaterialsByErpOrderNumberResponse">
+    <wsdl:part name="bindingMaterialsByErpOrderNumberReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="FindLotExtByLotIDRequest">
+    <wsdl:part name="lotId" type="soapenc:string" />
+    <wsdl:part name="facilityRrn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="dispatchLotForELRequest">
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="userId" type="soapenc:string" />
+    <wsdl:part name="eqipId" type="soapenc:string" />
+    <wsdl:part name="lotIds" type="soapenc:string" />
+    <wsdl:part name="transData" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="recordLot4WelderRequest">
+    <wsdl:part name="str" type="soapenc:string" />
+    <wsdl:part name="separator" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="qryJobListByEquipRequest">
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="eqipId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="dispatchLotRequest">
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="userId" type="soapenc:string" />
+    <wsdl:part name="eqipId" type="soapenc:string" />
+    <wsdl:part name="lotIds" type="soapenc:string" />
+    <wsdl:part name="transData" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="bindingMaterialsByAgvOrderNumberRequest">
+    <wsdl:part name="userName" type="soapenc:string" />
+    <wsdl:part name="taskNo" type="soapenc:string" />
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="flag" type="soapenc:string" />
+    <wsdl:part name="returnReason" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderExtByOrderIDResponse">
+    <wsdl:part name="GetOrderExtByOrderIDReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="GetOrderExtByOrderIDRequest">
+    <wsdl:part name="orderId" type="soapenc:string" />
+    <wsdl:part name="facilityRrn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="transferMatForWmsResponse">
+    <wsdl:part name="transferMatForWmsReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="saveIVFrockInfoRequest">
+    <wsdl:part name="IVFrockInfo" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="dispatchforSouthVIRequest">
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="userId" type="soapenc:string" />
+    <wsdl:part name="eqipId" type="soapenc:string" />
+    <wsdl:part name="lotIds" type="soapenc:string" />
+    <wsdl:part name="transData" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="GetLotBasicInfoRequest">
+    <wsdl:part name="lotId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="GetLotNewPowerIMPValRequest">
+    <wsdl:part name="lotRrn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="saveWMSReturnMaterialsInfoResponse">
+    <wsdl:part name="saveWMSReturnMaterialsInfoReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="GetLotNewPowerIMPValResponse">
+    <wsdl:part name="GetLotNewPowerIMPValReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="lotLaminationDataTransmissionRequest">
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="userId" type="soapenc:string" />
+    <wsdl:part name="eqpId" type="soapenc:string" />
+    <wsdl:part name="lotIds" type="soapenc:string" />
+    <wsdl:part name="count" type="xsd:int" />
+    <wsdl:part name="transData" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="lotDemotionAndReleaseInterfaceResponse">
+    <wsdl:part name="lotDemotionAndReleaseInterfaceReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="recordLot4WelderResponse">
+    <wsdl:part name="recordLot4WelderReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="UncompletePalletResponse">
+    <wsdl:part name="UncompletePalletReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="getModuleInformationRequest">
+    <wsdl:part name="lotId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPalletInfo4StationResponse">
+    <wsdl:part name="GetPalletInfo4StationReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="verifyLotDefectResponse">
+    <wsdl:part name="verifyLotDefectReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="uploadElImageRequest">
+    <wsdl:part name="lotId" type="soapenc:string" />
+    <wsdl:part name="eqptId" type="soapenc:string" />
+    <wsdl:part name="imagePath" type="soapenc:string" />
+    <wsdl:part name="hostName" type="soapenc:string" />
+    <wsdl:part name="hostIp" type="soapenc:string" />
+    <wsdl:part name="imageBackUpPath" type="soapenc:string" />
+    <wsdl:part name="type" type="soapenc:string" />
+    <wsdl:part name="userId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="dispatchLotForCyResponse">
+    <wsdl:part name="dispatchLotForCyReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="dispatchLotForLamResponse">
+    <wsdl:part name="dispatchLotForLamReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="getLotInfoResponse">
+    <wsdl:part name="getLotInfoReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPrintLogResponse">
+    <wsdl:part name="GetPrintLogReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="GetMarkInfoDTResponse">
+    <wsdl:part name="GetMarkInfoDTReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="saveAiLineInfoRequest">
+    <wsdl:part name="lotId" type="soapenc:string" />
+    <wsdl:part name="reasonDetail" type="soapenc:string" />
+    <wsdl:part name="reasonType" type="soapenc:string" />
+    <wsdl:part name="dateTime" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="EAPreturnMaterialInterfaceRequest">
+    <wsdl:part name="eqptId" type="soapenc:string" />
+    <wsdl:part name="workOrderId" type="soapenc:string" />
+    <wsdl:part name="itemId" type="soapenc:string" />
+    <wsdl:part name="lotNumber" type="soapenc:string" />
+    <wsdl:part name="returnQty" type="soapenc:string" />
+    <wsdl:part name="facilityId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="heartbeatErrorRequest">
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="eqptId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPalletWithPowerInfoRequest">
+    <wsdl:part name="palletId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="bindingMaterialsByAgvOrderNumberResponse">
+    <wsdl:part name="bindingMaterialsByAgvOrderNumberReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPrintLogRequest">
+    <wsdl:part name="printId" type="soapenc:string" />
+    <wsdl:part name="printType" type="soapenc:string" />
+    <wsdl:part name="facilityRrn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="recordeElInfoRequest">
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="userId" type="soapenc:string" />
+    <wsdl:part name="eqipId" type="soapenc:string" />
+    <wsdl:part name="lotIds" type="soapenc:string" />
+    <wsdl:part name="transData" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="withStandVoltageResponse">
+    <wsdl:part name="withStandVoltageReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="dispatchCancelPostingRequest">
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="userId" type="soapenc:string" />
+    <wsdl:part name="workOrderId" type="soapenc:string" />
+    <wsdl:part name="eqpId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="getWorkOrderListByAgvResponse">
+    <wsdl:part name="getWorkOrderListByAgvReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="dispatchLotForFRResponse">
+    <wsdl:part name="dispatchLotForFRReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="heartbeatErrorResponse">
+    <wsdl:part name="heartbeatErrorReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="RequestBoxInfoRequest">
+    <wsdl:part name="palletId" type="soapenc:string" />
+    <wsdl:part name="TaskNo" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="EAPreturnMaterialInterfaceResponse">
+    <wsdl:part name="EAPreturnMaterialInterfaceReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="EAPneedMaterialInterfaceResponse">
+    <wsdl:part name="EAPneedMaterialInterfaceReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="dispatchforSouthVIResponse">
+    <wsdl:part name="dispatchforSouthVIReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="agvCheckMaterialOneResponse">
+    <wsdl:part name="agvCheckMaterialOneReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="saveIVFrockInfoResponse">
+    <wsdl:part name="saveIVFrockInfoReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="lotLaminationDataTransmissionResponse">
+    <wsdl:part name="lotLaminationDataTransmissionReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="checkPrintFlagRequest">
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="userId" type="soapenc:string" />
+    <wsdl:part name="lotId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="generalUploadInterfaceResponse">
+    <wsdl:part name="generalUploadInterfaceReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="dispatchforNorthVIRequest">
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="userId" type="soapenc:string" />
+    <wsdl:part name="eqipId" type="soapenc:string" />
+    <wsdl:part name="lotIds" type="soapenc:string" />
+    <wsdl:part name="transData" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="checkLotIdRequest">
+    <wsdl:part name="glassLotId" type="soapenc:string" />
+    <wsdl:part name="farmeLotId" type="soapenc:string" />
+    <wsdl:part name="facilityRrn" type="soapenc:long" />
+  </wsdl:message>
+  <wsdl:message name="getPalletLocationRequest">
+    <wsdl:part name="lotId" type="soapenc:string" />
+    <wsdl:part name="lineId" type="soapenc:string" />
+    <wsdl:part name="facilityId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="getMaterialInfo4FRRequest">
+    <wsdl:part name="lotId" type="soapenc:string" />
+    <wsdl:part name="eqptId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="FailStorePalletResponse">
+    <wsdl:part name="FailStorePalletReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="saveZKAiLineInfoResponse">
+    <wsdl:part name="saveZKAiLineInfoReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="uploadElImageResponse">
+    <wsdl:part name="uploadElImageReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="dispatchLotForELResponse">
+    <wsdl:part name="dispatchLotForELReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="geteapglassidRequest">
+    <wsdl:part name="glassjson" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="getTheComponentVersionRequest">
+    <wsdl:part name="lotId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="repaireForElResponse">
+    <wsdl:part name="repaireForElReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="getTheComponentVersionResponse">
+    <wsdl:part name="getTheComponentVersionReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="BuildPrintTransLogResponse">
+    <wsdl:part name="BuildPrintTransLogReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="checkLotIdResponse">
+    <wsdl:part name="checkLotIdReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="rejectMaterialsByErpOrderNumberResponse">
+    <wsdl:part name="rejectMaterialsByErpOrderNumberReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="getMaterialInfo4FRResponse">
+    <wsdl:part name="getMaterialInfo4FRReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="UpdateLotExtResponse">
+    <wsdl:part name="UpdateLotExtReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="entityStatusChangeRequest">
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="eqptId" type="soapenc:string" />
+    <wsdl:part name="destStatus" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="loginResponse">
+    <wsdl:part name="loginReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="dispatchLotForFRRequest">
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="userId" type="soapenc:string" />
+    <wsdl:part name="eqipId" type="soapenc:string" />
+    <wsdl:part name="lotIds" type="soapenc:string" />
+    <wsdl:part name="transData" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="entityStatusChangeResponse">
+    <wsdl:part name="entityStatusChangeReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="RequestPalletInfoRequest">
+    <wsdl:part name="palletId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="GetELImagebyPalletResponse">
+    <wsdl:part name="GetELImagebyPalletReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="getBarCodeResponse">
+    <wsdl:part name="getBarCodeReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="UncompletePalletRequest">
+    <wsdl:part name="palletIds" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="checkMaterialLotRequest">
+    <wsdl:part name="condtion" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="saveAiLineInfoResponse">
+    <wsdl:part name="saveAiLineInfoReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="BuildPrintTransLogRequest">
+    <wsdl:part name="printId" type="soapenc:string" />
+    <wsdl:part name="printType" type="soapenc:string" />
+    <wsdl:part name="templateName" type="soapenc:string" />
+    <wsdl:part name="userId" type="soapenc:string" />
+    <wsdl:part name="facilityRrn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="checkMaterialLotResponse">
+    <wsdl:part name="checkMaterialLotReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="repaireForElRequest">
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="userId" type="soapenc:string" />
+    <wsdl:part name="eqipId" type="soapenc:string" />
+    <wsdl:part name="lotIds" type="soapenc:string" />
+    <wsdl:part name="consumeMaterial" type="soapenc:string" />
+    <wsdl:part name="materialLotId" type="soapenc:string" />
+    <wsdl:part name="transData" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="agvCheckMaterialTwoResponse">
+    <wsdl:part name="agvCheckMaterialTwoReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="EAPbindingMaterialInterfaceResponse">
+    <wsdl:part name="EAPbindingMaterialInterfaceReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPowerIDBylotrrnRequest">
+    <wsdl:part name="lotRrn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="getNameplateInfoRequest">
+    <wsdl:part name="lotId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="getWorkOrderInfoForSCHRequest">
+    <wsdl:part name="startDate" type="soapenc:string" />
+    <wsdl:part name="endDate" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPalletWithPowerInfoResponse">
+    <wsdl:part name="GetPalletWithPowerInfoReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="verifyLotDefectRequest">
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="lotId" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPalletInfo4StationRequest">
+    <wsdl:part name="palletStr" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="lotDemotionAndReleaseInterfaceRequest">
+    <wsdl:part name="facilityId" type="soapenc:string" />
+    <wsdl:part name="lotId" type="soapenc:string" />
+    <wsdl:part name="newGrade" type="soapenc:string" />
+    <wsdl:part name="userId" type="soapenc:string" />
+    <wsdl:part name="comments" type="soapenc:string" />
+    <wsdl:part name="type" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="agvCheckMaterialTwoRequest">
+    <wsdl:part name="lineId" type="soapenc:string" />
+    <wsdl:part name="shiftId" type="soapenc:string" />
+    <wsdl:part name="itemInfo" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="getNameplateInfoResponse">
+    <wsdl:part name="getNameplateInfoReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="GetPowerIDBylotrrnResponse">
+    <wsdl:part name="GetPowerIDBylotrrnReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="getElTransInfoResponse">
+    <wsdl:part name="getElTransInfoReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:message name="dispatchLotForLuResponse">
+    <wsdl:part name="dispatchLotForLuReturn" type="soapenc:string" />
+  </wsdl:message>
+  <wsdl:portType name="JobManagementWebService">
+    <wsdl:operation name="login" parameterOrder="userName password facilityId">
+      <wsdl:input name="loginRequest" message="impl:loginRequest" />
+      <wsdl:output name="loginResponse" message="impl:loginResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="lotLaminationDataTransmission" parameterOrder="facilityId userId eqpId lotIds count transData">
+      <wsdl:input name="lotLaminationDataTransmissionRequest" message="impl:lotLaminationDataTransmissionRequest" />
+      <wsdl:output name="lotLaminationDataTransmissionResponse" message="impl:lotLaminationDataTransmissionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="dispatchLotForLam" parameterOrder="facilityId userId eqipId lotIds transData">
+      <wsdl:input name="dispatchLotForLamRequest" message="impl:dispatchLotForLamRequest" />
+      <wsdl:output name="dispatchLotForLamResponse" message="impl:dispatchLotForLamResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="dispatchLotForCy" parameterOrder="facilityId userId lotId">
+      <wsdl:input name="dispatchLotForCyRequest" message="impl:dispatchLotForCyRequest" />
+      <wsdl:output name="dispatchLotForCyResponse" message="impl:dispatchLotForCyResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="dispatchLot" parameterOrder="facilityId userId eqipId lotIds transData">
+      <wsdl:input name="dispatchLotRequest" message="impl:dispatchLotRequest" />
+      <wsdl:output name="dispatchLotResponse" message="impl:dispatchLotResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="dispatchLotForFR" parameterOrder="facilityId userId eqipId lotIds transData">
+      <wsdl:input name="dispatchLotForFRRequest" message="impl:dispatchLotForFRRequest" />
+      <wsdl:output name="dispatchLotForFRResponse" message="impl:dispatchLotForFRResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="dispatchLotForEL" parameterOrder="facilityId userId eqipId lotIds transData">
+      <wsdl:input name="dispatchLotForELRequest" message="impl:dispatchLotForELRequest" />
+      <wsdl:output name="dispatchLotForELResponse" message="impl:dispatchLotForELResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="dispatchLotForLu" parameterOrder="facilityId userId eqipId lotIds transData weldereqpId mertialId">
+      <wsdl:input name="dispatchLotForLuRequest" message="impl:dispatchLotForLuRequest" />
+      <wsdl:output name="dispatchLotForLuResponse" message="impl:dispatchLotForLuResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="recordLot4Welder" parameterOrder="str separator">
+      <wsdl:input name="recordLot4WelderRequest" message="impl:recordLot4WelderRequest" />
+      <wsdl:output name="recordLot4WelderResponse" message="impl:recordLot4WelderResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="qryJobListByEquip" parameterOrder="facilityId eqipId">
+      <wsdl:input name="qryJobListByEquipRequest" message="impl:qryJobListByEquipRequest" />
+      <wsdl:output name="qryJobListByEquipResponse" message="impl:qryJobListByEquipResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="checkMaterialLot" parameterOrder="condtion">
+      <wsdl:input name="checkMaterialLotRequest" message="impl:checkMaterialLotRequest" />
+      <wsdl:output name="checkMaterialLotResponse" message="impl:checkMaterialLotResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getEqpInfo" parameterOrder="userId equipId facilityRrn">
+      <wsdl:input name="getEqpInfoRequest" message="impl:getEqpInfoRequest" />
+      <wsdl:output name="getEqpInfoResponse" message="impl:getEqpInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getMaterialInfo4FR" parameterOrder="lotId eqptId">
+      <wsdl:input name="getMaterialInfo4FRRequest" message="impl:getMaterialInfo4FRRequest" />
+      <wsdl:output name="getMaterialInfo4FRResponse" message="impl:getMaterialInfo4FRResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="repaireForEl" parameterOrder="facilityId userId eqipId lotIds consumeMaterial materialLotId transData">
+      <wsdl:input name="repaireForElRequest" message="impl:repaireForElRequest" />
+      <wsdl:output name="repaireForElResponse" message="impl:repaireForElResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getElTransInfo" parameterOrder="lotId eqptId">
+      <wsdl:input name="getElTransInfoRequest" message="impl:getElTransInfoRequest" />
+      <wsdl:output name="getElTransInfoResponse" message="impl:getElTransInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="entityStatusChange" parameterOrder="facilityId eqptId destStatus">
+      <wsdl:input name="entityStatusChangeRequest" message="impl:entityStatusChangeRequest" />
+      <wsdl:output name="entityStatusChangeResponse" message="impl:entityStatusChangeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="uploadElImage" parameterOrder="lotId eqptId imagePath hostName hostIp imageBackUpPath type userId">
+      <wsdl:input name="uploadElImageRequest" message="impl:uploadElImageRequest" />
+      <wsdl:output name="uploadElImageResponse" message="impl:uploadElImageResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="EAPneedMaterialInterface" parameterOrder="eqptId facilityId callItemType">
+      <wsdl:input name="EAPneedMaterialInterfaceRequest" message="impl:EAPneedMaterialInterfaceRequest" />
+      <wsdl:output name="EAPneedMaterialInterfaceResponse" message="impl:EAPneedMaterialInterfaceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="EAPbindingMaterialInterface" parameterOrder="eqptId workOrderId itemId lotNumber qty supplierId facilityId">
+      <wsdl:input name="EAPbindingMaterialInterfaceRequest" message="impl:EAPbindingMaterialInterfaceRequest" />
+      <wsdl:output name="EAPbindingMaterialInterfaceResponse" message="impl:EAPbindingMaterialInterfaceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="EAPreturnMaterialInterface" parameterOrder="eqptId workOrderId itemId lotNumber returnQty facilityId">
+      <wsdl:input name="EAPreturnMaterialInterfaceRequest" message="impl:EAPreturnMaterialInterfaceRequest" />
+      <wsdl:output name="EAPreturnMaterialInterfaceResponse" message="impl:EAPreturnMaterialInterfaceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getWorkOrderListByAgv" parameterOrder="facilityId eqptId itemId lotNumber">
+      <wsdl:input name="getWorkOrderListByAgvRequest" message="impl:getWorkOrderListByAgvRequest" />
+      <wsdl:output name="getWorkOrderListByAgvResponse" message="impl:getWorkOrderListByAgvResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPalletInfo4Station" parameterOrder="palletStr">
+      <wsdl:input name="GetPalletInfo4StationRequest" message="impl:GetPalletInfo4StationRequest" />
+      <wsdl:output name="GetPalletInfo4StationResponse" message="impl:GetPalletInfo4StationResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="RequestBoxInfo" parameterOrder="palletId TaskNo">
+      <wsdl:input name="RequestBoxInfoRequest" message="impl:RequestBoxInfoRequest" />
+      <wsdl:output name="RequestBoxInfoResponse" message="impl:RequestBoxInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="FailStorePallet" parameterOrder="palletId">
+      <wsdl:input name="FailStorePalletRequest" message="impl:FailStorePalletRequest" />
+      <wsdl:output name="FailStorePalletResponse" message="impl:FailStorePalletResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="UncompletePallet" parameterOrder="palletIds">
+      <wsdl:input name="UncompletePalletRequest" message="impl:UncompletePalletRequest" />
+      <wsdl:output name="UncompletePalletResponse" message="impl:UncompletePalletResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getWorkOrderInfoForSCH" parameterOrder="startDate endDate">
+      <wsdl:input name="getWorkOrderInfoForSCHRequest" message="impl:getWorkOrderInfoForSCHRequest" />
+      <wsdl:output name="getWorkOrderInfoForSCHResponse" message="impl:getWorkOrderInfoForSCHResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="lotDemotionAndReleaseInterface" parameterOrder="facilityId lotId newGrade userId comments type">
+      <wsdl:input name="lotDemotionAndReleaseInterfaceRequest" message="impl:lotDemotionAndReleaseInterfaceRequest" />
+      <wsdl:output name="lotDemotionAndReleaseInterfaceResponse" message="impl:lotDemotionAndReleaseInterfaceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getTheComponentVersion" parameterOrder="lotId">
+      <wsdl:input name="getTheComponentVersionRequest" message="impl:getTheComponentVersionRequest" />
+      <wsdl:output name="getTheComponentVersionResponse" message="impl:getTheComponentVersionResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="lotCuringRoomNotice" parameterOrder="facilityId lotId area type">
+      <wsdl:input name="lotCuringRoomNoticeRequest" message="impl:lotCuringRoomNoticeRequest" />
+      <wsdl:output name="lotCuringRoomNoticeResponse" message="impl:lotCuringRoomNoticeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="verifyLotDefect" parameterOrder="facilityId lotId">
+      <wsdl:input name="verifyLotDefectRequest" message="impl:verifyLotDefectRequest" />
+      <wsdl:output name="verifyLotDefectResponse" message="impl:verifyLotDefectResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="RequestPalletInfo" parameterOrder="palletId">
+      <wsdl:input name="RequestPalletInfoRequest" message="impl:RequestPalletInfoRequest" />
+      <wsdl:output name="RequestPalletInfoResponse" message="impl:RequestPalletInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="bindingMaterialsByErpOrderNumber" parameterOrder="orderNumber facilityId userId">
+      <wsdl:input name="bindingMaterialsByErpOrderNumberRequest" message="impl:bindingMaterialsByErpOrderNumberRequest" />
+      <wsdl:output name="bindingMaterialsByErpOrderNumberResponse" message="impl:bindingMaterialsByErpOrderNumberResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="rejectMaterialsByErpOrderNumber" parameterOrder="orderNumber facilityId userId">
+      <wsdl:input name="rejectMaterialsByErpOrderNumberRequest" message="impl:rejectMaterialsByErpOrderNumberRequest" />
+      <wsdl:output name="rejectMaterialsByErpOrderNumberResponse" message="impl:rejectMaterialsByErpOrderNumberResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="bindingMaterialsByAgvOrderNumber" parameterOrder="userName taskNo facilityId flag returnReason">
+      <wsdl:input name="bindingMaterialsByAgvOrderNumberRequest" message="impl:bindingMaterialsByAgvOrderNumberRequest" />
+      <wsdl:output name="bindingMaterialsByAgvOrderNumberResponse" message="impl:bindingMaterialsByAgvOrderNumberResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="FindLotExtByLotID" parameterOrder="lotId facilityRrn">
+      <wsdl:input name="FindLotExtByLotIDRequest" message="impl:FindLotExtByLotIDRequest" />
+      <wsdl:output name="FindLotExtByLotIDResponse" message="impl:FindLotExtByLotIDResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getModuleInformation" parameterOrder="lotId">
+      <wsdl:input name="getModuleInformationRequest" message="impl:getModuleInformationRequest" />
+      <wsdl:output name="getModuleInformationResponse" message="impl:getModuleInformationResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetMarkInfoDT" parameterOrder="palletId">
+      <wsdl:input name="GetMarkInfoDTRequest" message="impl:GetMarkInfoDTRequest" />
+      <wsdl:output name="GetMarkInfoDTResponse" message="impl:GetMarkInfoDTResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLotNewPowerIMPVal" parameterOrder="lotRrn">
+      <wsdl:input name="GetLotNewPowerIMPValRequest" message="impl:GetLotNewPowerIMPValRequest" />
+      <wsdl:output name="GetLotNewPowerIMPValResponse" message="impl:GetLotNewPowerIMPValResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPowerIDBylotrrn" parameterOrder="lotRrn">
+      <wsdl:input name="GetPowerIDBylotrrnRequest" message="impl:GetPowerIDBylotrrnRequest" />
+      <wsdl:output name="GetPowerIDBylotrrnResponse" message="impl:GetPowerIDBylotrrnResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPrintLog" parameterOrder="printId printType facilityRrn">
+      <wsdl:input name="GetPrintLogRequest" message="impl:GetPrintLogRequest" />
+      <wsdl:output name="GetPrintLogResponse" message="impl:GetPrintLogResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GeyPalletInFoByExcel" parameterOrder="palletListString rowmum num">
+      <wsdl:input name="GeyPalletInFoByExcelRequest" message="impl:GeyPalletInFoByExcelRequest" />
+      <wsdl:output name="GeyPalletInFoByExcelResponse" message="impl:GeyPalletInFoByExcelResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderExtByOrderID" parameterOrder="orderId facilityRrn">
+      <wsdl:input name="GetOrderExtByOrderIDRequest" message="impl:GetOrderExtByOrderIDRequest" />
+      <wsdl:output name="GetOrderExtByOrderIDResponse" message="impl:GetOrderExtByOrderIDResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getNameplateInformation" parameterOrder="orderId">
+      <wsdl:input name="getNameplateInformationRequest" message="impl:getNameplateInformationRequest" />
+      <wsdl:output name="getNameplateInformationResponse" message="impl:getNameplateInformationResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="BuildPrintTransLog" parameterOrder="printId printType templateName userId facilityRrn">
+      <wsdl:input name="BuildPrintTransLogRequest" message="impl:BuildPrintTransLogRequest" />
+      <wsdl:output name="BuildPrintTransLogResponse" message="impl:BuildPrintTransLogResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLotExt" parameterOrder="specialCode lotRrn">
+      <wsdl:input name="UpdateLotExtRequest" message="impl:UpdateLotExtRequest" />
+      <wsdl:output name="UpdateLotExtResponse" message="impl:UpdateLotExtResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getPalletLocation" parameterOrder="lotId lineId facilityId">
+      <wsdl:input name="getPalletLocationRequest" message="impl:getPalletLocationRequest" />
+      <wsdl:output name="getPalletLocationResponse" message="impl:getPalletLocationResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getLotInfo" parameterOrder="lotId equipRrn userRrn facilityRrn">
+      <wsdl:input name="getLotInfoRequest" message="impl:getLotInfoRequest" />
+      <wsdl:output name="getLotInfoResponse" message="impl:getLotInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="transferMatForWms" parameterOrder="wmsDatas facilityId transUser">
+      <wsdl:input name="transferMatForWmsRequest" message="impl:transferMatForWmsRequest" />
+      <wsdl:output name="transferMatForWmsResponse" message="impl:transferMatForWmsResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getNameplateInfo" parameterOrder="lotId">
+      <wsdl:input name="getNameplateInfoRequest" message="impl:getNameplateInfoRequest" />
+      <wsdl:output name="getNameplateInfoResponse" message="impl:getNameplateInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getBarCode" parameterOrder="facilityId eqpId workOrderId userId requestQty">
+      <wsdl:input name="getBarCodeRequest" message="impl:getBarCodeRequest" />
+      <wsdl:output name="getBarCodeResponse" message="impl:getBarCodeResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="getWorkOrderIdByEqpId" parameterOrder="facilityId userId eqpId">
+      <wsdl:input name="getWorkOrderIdByEqpIdRequest" message="impl:getWorkOrderIdByEqpIdRequest" />
+      <wsdl:output name="getWorkOrderIdByEqpIdResponse" message="impl:getWorkOrderIdByEqpIdResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="dispatchCancelPosting" parameterOrder="facilityId userId workOrderId eqpId">
+      <wsdl:input name="dispatchCancelPostingRequest" message="impl:dispatchCancelPostingRequest" />
+      <wsdl:output name="dispatchCancelPostingResponse" message="impl:dispatchCancelPostingResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="checkPrintFlag" parameterOrder="facilityId userId lotId">
+      <wsdl:input name="checkPrintFlagRequest" message="impl:checkPrintFlagRequest" />
+      <wsdl:output name="checkPrintFlagResponse" message="impl:checkPrintFlagResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="saveIVFrockInfo" parameterOrder="IVFrockInfo">
+      <wsdl:input name="saveIVFrockInfoRequest" message="impl:saveIVFrockInfoRequest" />
+      <wsdl:output name="saveIVFrockInfoResponse" message="impl:saveIVFrockInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="saveWMSReturnMaterialsInfo" parameterOrder="transData">
+      <wsdl:input name="saveWMSReturnMaterialsInfoRequest" message="impl:saveWMSReturnMaterialsInfoRequest" />
+      <wsdl:output name="saveWMSReturnMaterialsInfoResponse" message="impl:saveWMSReturnMaterialsInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="saveAiLineInfo" parameterOrder="lotId reasonDetail reasonType dateTime">
+      <wsdl:input name="saveAiLineInfoRequest" message="impl:saveAiLineInfoRequest" />
+      <wsdl:output name="saveAiLineInfoResponse" message="impl:saveAiLineInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="agvCheckMaterialOne" parameterOrder="lineId shiftId itemType">
+      <wsdl:input name="agvCheckMaterialOneRequest" message="impl:agvCheckMaterialOneRequest" />
+      <wsdl:output name="agvCheckMaterialOneResponse" message="impl:agvCheckMaterialOneResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="agvCheckMaterialTwo" parameterOrder="lineId shiftId itemInfo">
+      <wsdl:input name="agvCheckMaterialTwoRequest" message="impl:agvCheckMaterialTwoRequest" />
+      <wsdl:output name="agvCheckMaterialTwoResponse" message="impl:agvCheckMaterialTwoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="generalUploadInterface" parameterOrder="facilityId lineId eqptId transType lotId decisionResult transData attr1 attr2 attr3">
+      <wsdl:input name="generalUploadInterfaceRequest" message="impl:generalUploadInterfaceRequest" />
+      <wsdl:output name="generalUploadInterfaceResponse" message="impl:generalUploadInterfaceResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="withStandVoltage" parameterOrder="data">
+      <wsdl:input name="withStandVoltageRequest" message="impl:withStandVoltageRequest" />
+      <wsdl:output name="withStandVoltageResponse" message="impl:withStandVoltageResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="checkLotId" parameterOrder="glassLotId farmeLotId facilityRrn">
+      <wsdl:input name="checkLotIdRequest" message="impl:checkLotIdRequest" />
+      <wsdl:output name="checkLotIdResponse" message="impl:checkLotIdResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="recordeElInfo" parameterOrder="facilityId userId eqipId lotIds transData">
+      <wsdl:input name="recordeElInfoRequest" message="impl:recordeElInfoRequest" />
+      <wsdl:output name="recordeElInfoResponse" message="impl:recordeElInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="geteapglassid" parameterOrder="glassjson">
+      <wsdl:input name="geteapglassidRequest" message="impl:geteapglassidRequest" />
+      <wsdl:output name="geteapglassidResponse" message="impl:geteapglassidResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPalletWithPowerInfo" parameterOrder="palletId">
+      <wsdl:input name="GetPalletWithPowerInfoRequest" message="impl:GetPalletWithPowerInfoRequest" />
+      <wsdl:output name="GetPalletWithPowerInfoResponse" message="impl:GetPalletWithPowerInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetLotBasicInfo" parameterOrder="lotId">
+      <wsdl:input name="GetLotBasicInfoRequest" message="impl:GetLotBasicInfoRequest" />
+      <wsdl:output name="GetLotBasicInfoResponse" message="impl:GetLotBasicInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="GetELImagebyPallet" parameterOrder="PalletListString rowmum chkLAMB chkLAMA chkIV chkLAMAVI chkLAMBVI chkJXH DataType">
+      <wsdl:input name="GetELImagebyPalletRequest" message="impl:GetELImagebyPalletRequest" />
+      <wsdl:output name="GetELImagebyPalletResponse" message="impl:GetELImagebyPalletResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="dispatchLotForDC" parameterOrder="facilityId userId eqipId lotId">
+      <wsdl:input name="dispatchLotForDCRequest" message="impl:dispatchLotForDCRequest" />
+      <wsdl:output name="dispatchLotForDCResponse" message="impl:dispatchLotForDCResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="saveZKAiLineInfo" parameterOrder="facilityId eqptId lotId user reasonDetail reasonType dateTime">
+      <wsdl:input name="saveZKAiLineInfoRequest" message="impl:saveZKAiLineInfoRequest" />
+      <wsdl:output name="saveZKAiLineInfoResponse" message="impl:saveZKAiLineInfoResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="heartbeatError" parameterOrder="facilityId eqptId">
+      <wsdl:input name="heartbeatErrorRequest" message="impl:heartbeatErrorRequest" />
+      <wsdl:output name="heartbeatErrorResponse" message="impl:heartbeatErrorResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="dispatchforSouthVI" parameterOrder="facilityId userId eqipId lotIds transData">
+      <wsdl:input name="dispatchforSouthVIRequest" message="impl:dispatchforSouthVIRequest" />
+      <wsdl:output name="dispatchforSouthVIResponse" message="impl:dispatchforSouthVIResponse" />
+    </wsdl:operation>
+    <wsdl:operation name="dispatchforNorthVI" parameterOrder="facilityId userId eqipId lotIds transData">
+      <wsdl:input name="dispatchforNorthVIRequest" message="impl:dispatchforNorthVIRequest" />
+      <wsdl:output name="dispatchforNorthVIResponse" message="impl:dispatchforNorthVIResponse" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="JobManagementWebServiceSoapBinding" type="impl:JobManagementWebService">
+    <wsdlsoap:binding transport="http://schemas.xmlsoap.org/soap/http" style="rpc" />
+    <wsdl:operation name="login">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="loginRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="loginResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="lotLaminationDataTransmission">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="lotLaminationDataTransmissionRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="lotLaminationDataTransmissionResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dispatchLotForLam">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="dispatchLotForLamRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="dispatchLotForLamResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dispatchLotForCy">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="dispatchLotForCyRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="dispatchLotForCyResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dispatchLot">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="dispatchLotRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="dispatchLotResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dispatchLotForFR">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="dispatchLotForFRRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="dispatchLotForFRResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dispatchLotForEL">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="dispatchLotForELRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="dispatchLotForELResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dispatchLotForLu">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="dispatchLotForLuRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="dispatchLotForLuResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="recordLot4Welder">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="recordLot4WelderRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="recordLot4WelderResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="qryJobListByEquip">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="qryJobListByEquipRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="qryJobListByEquipResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkMaterialLot">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="checkMaterialLotRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="checkMaterialLotResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getEqpInfo">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getEqpInfoRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getEqpInfoResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getMaterialInfo4FR">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getMaterialInfo4FRRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getMaterialInfo4FRResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="repaireForEl">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="repaireForElRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="repaireForElResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getElTransInfo">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getElTransInfoRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getElTransInfoResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="entityStatusChange">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="entityStatusChangeRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="entityStatusChangeResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="uploadElImage">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="uploadElImageRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="uploadElImageResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EAPneedMaterialInterface">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="EAPneedMaterialInterfaceRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="EAPneedMaterialInterfaceResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EAPbindingMaterialInterface">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="EAPbindingMaterialInterfaceRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="EAPbindingMaterialInterfaceResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="EAPreturnMaterialInterface">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="EAPreturnMaterialInterfaceRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="EAPreturnMaterialInterfaceResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getWorkOrderListByAgv">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getWorkOrderListByAgvRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getWorkOrderListByAgvResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPalletInfo4Station">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="GetPalletInfo4StationRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="GetPalletInfo4StationResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RequestBoxInfo">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="RequestBoxInfoRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="RequestBoxInfoResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FailStorePallet">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="FailStorePalletRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="FailStorePalletResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UncompletePallet">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="UncompletePalletRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="UncompletePalletResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getWorkOrderInfoForSCH">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getWorkOrderInfoForSCHRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getWorkOrderInfoForSCHResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="lotDemotionAndReleaseInterface">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="lotDemotionAndReleaseInterfaceRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="lotDemotionAndReleaseInterfaceResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getTheComponentVersion">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getTheComponentVersionRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getTheComponentVersionResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="lotCuringRoomNotice">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="lotCuringRoomNoticeRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="lotCuringRoomNoticeResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="verifyLotDefect">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="verifyLotDefectRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="verifyLotDefectResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="RequestPalletInfo">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="RequestPalletInfoRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="RequestPalletInfoResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="bindingMaterialsByErpOrderNumber">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="bindingMaterialsByErpOrderNumberRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="bindingMaterialsByErpOrderNumberResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="rejectMaterialsByErpOrderNumber">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="rejectMaterialsByErpOrderNumberRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="rejectMaterialsByErpOrderNumberResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="bindingMaterialsByAgvOrderNumber">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="bindingMaterialsByAgvOrderNumberRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="bindingMaterialsByAgvOrderNumberResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="FindLotExtByLotID">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="FindLotExtByLotIDRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="FindLotExtByLotIDResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getModuleInformation">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getModuleInformationRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getModuleInformationResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetMarkInfoDT">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="GetMarkInfoDTRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="GetMarkInfoDTResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLotNewPowerIMPVal">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="GetLotNewPowerIMPValRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="GetLotNewPowerIMPValResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPowerIDBylotrrn">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="GetPowerIDBylotrrnRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="GetPowerIDBylotrrnResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPrintLog">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="GetPrintLogRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="GetPrintLogResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GeyPalletInFoByExcel">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="GeyPalletInFoByExcelRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="GeyPalletInFoByExcelResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetOrderExtByOrderID">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="GetOrderExtByOrderIDRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="GetOrderExtByOrderIDResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getNameplateInformation">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getNameplateInformationRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getNameplateInformationResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="BuildPrintTransLog">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="BuildPrintTransLogRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="BuildPrintTransLogResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateLotExt">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="UpdateLotExtRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="UpdateLotExtResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getPalletLocation">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getPalletLocationRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getPalletLocationResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getLotInfo">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getLotInfoRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getLotInfoResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="transferMatForWms">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="transferMatForWmsRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="transferMatForWmsResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getNameplateInfo">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getNameplateInfoRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getNameplateInfoResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBarCode">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getBarCodeRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getBarCodeResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getWorkOrderIdByEqpId">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="getWorkOrderIdByEqpIdRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="getWorkOrderIdByEqpIdResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dispatchCancelPosting">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="dispatchCancelPostingRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="dispatchCancelPostingResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkPrintFlag">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="checkPrintFlagRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="checkPrintFlagResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveIVFrockInfo">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="saveIVFrockInfoRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="saveIVFrockInfoResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveWMSReturnMaterialsInfo">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="saveWMSReturnMaterialsInfoRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="saveWMSReturnMaterialsInfoResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveAiLineInfo">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="saveAiLineInfoRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="saveAiLineInfoResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="agvCheckMaterialOne">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="agvCheckMaterialOneRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="agvCheckMaterialOneResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="agvCheckMaterialTwo">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="agvCheckMaterialTwoRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="agvCheckMaterialTwoResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="generalUploadInterface">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="generalUploadInterfaceRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="generalUploadInterfaceResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="withStandVoltage">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="withStandVoltageRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="withStandVoltageResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="checkLotId">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="checkLotIdRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="checkLotIdResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="recordeElInfo">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="recordeElInfoRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="recordeElInfoResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="geteapglassid">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="geteapglassidRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="geteapglassidResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPalletWithPowerInfo">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="GetPalletWithPowerInfoRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="GetPalletWithPowerInfoResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetLotBasicInfo">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="GetLotBasicInfoRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="GetLotBasicInfoResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetELImagebyPallet">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="GetELImagebyPalletRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="GetELImagebyPalletResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dispatchLotForDC">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="dispatchLotForDCRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="dispatchLotForDCResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="saveZKAiLineInfo">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="saveZKAiLineInfoRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="saveZKAiLineInfoResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="heartbeatError">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="heartbeatErrorRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="heartbeatErrorResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dispatchforSouthVI">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="dispatchforSouthVIRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="dispatchforSouthVIResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="dispatchforNorthVI">
+      <wsdlsoap:operation soapAction="" />
+      <wsdl:input name="dispatchforNorthVIRequest">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:input>
+      <wsdl:output name="dispatchforNorthVIResponse">
+        <wsdlsoap:body use="encoded" namespace="http://xml.fa-software.com/mycim/wsdd/" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="JobManagementWebServiceService">
+    <wsdl:port name="JobManagementWebService" binding="impl:JobManagementWebServiceSoapBinding">
+      <wsdlsoap:address location="http://172.17.200.189:8888/mycim2/services/JobManagementWebService" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

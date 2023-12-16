@@ -18,9 +18,9 @@ using System.ServiceModel.Configuration;
 using System.Linq;
 using WebServiceTool;
 using WebServiceTool.AppComm;
-using WebTool.AppComm;
 using System.Reflection;
 using WebServiceTool.AppComm.Enity;
+using WebServiceTool.AppComm.Tool;
 
 namespace CommTcper
 {
@@ -232,16 +232,23 @@ namespace CommTcper
                         modbusTcp.WriteInt(_address, 0);
                         if (!string.IsNullOrEmpty(ConstData.CurrenScanCode)) //过账流程
                         {
-                            ShowMsgScan("过账成功:");
-                            //string _postBack = Client.dispatchLotForDC(_facilityId, _userId, _eqpId, ConstData.CurrenScanCode);
-
-                            //NewGetBarcode getBarcode = CTool.GetBarCode(_postBack);
-                            //if (getBarcode.success)
-                            //{
-                            //    ShowMsgScan("过账成功:" + getBarcode.msg);
-                            //}
-                            //else { ShowMsgScan("过账异常:" + getBarcode.msg); }
-                            ConstData.CurrenScanCode = string.Empty;
+                            try
+                            {
+                                ShowMsgScan("过账流程开始");
+                                string _postBack = Client.dispatchLotForDC(_facilityId, _userId, _eqpId, ConstData.CurrenScanCode);
+                                NewGetBarcode getBarcode = CTool.GetBarCode(_postBack);
+                                if (getBarcode.success)
+                                {
+                                    ShowMsgScan("过账成功:" + getBarcode.msg);
+                                }
+                                else { ShowMsgScan("过账异常:" + getBarcode.msg); }
+                                ConstData.CurrenScanCode = string.Empty;
+                            }
+                            catch
+                            {
+                                ShowMsgScan("过账MES请求异常！请重新请求！");
+                            }
+                            
                         }
                         else
                         {
@@ -369,7 +376,7 @@ namespace CommTcper
             bt_cancel.Enabled = true;
             try
             {
-                //Init();
+                Init();
 
                 ShowSerMsg("重新连接中");
                 bt_cancel.Enabled = false;
@@ -495,93 +502,72 @@ namespace CommTcper
                 }
                 else
                 {
-
-                    ////GetBarcodesRet _getBarcodesRet = CTool.applyForBarcode(_webServiceUri, _currentOrderNo, _productionLine);
-                    ////List<string> _ls = new List<string>();
-                    ////_ls.Add("XXX0011111111111111119");
-                    ////_ls.Add("XXX0011111111111111118");
-                    ////_ls.Add("XXX0011111111111111117");
-                    ////_ls.Add("XXX0011111111111111122");
-                    ////_ls.Add("XXX0011111111111111123");
-                    ////_ls.Add("XXX0011111111111111124");
-                    ////bool _checkFlag = false;
-                    ////foreach (string _sl in _ls)
-                    ////{
-                    ////    dt = DbIns.SysDb.ExecuteSql("select 1 from mesprint where sn='" + _sl + "';").Result as DataTable;
-                    ////    if (null != dt && null != dt.Rows && dt.Rows.Count > 0)
-                    ////    {
-                    ////        _checkFlag = true;
-                    ////        break;
-                    ////    }
-                    ////}
-                    ////if (_checkFlag)
-                    ////{
-                    ////    MessageBox.Show("获取的条码有部分已经被打印,请和MES确认!", "通讯程序", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    ////    ShowSerMsg("获取的条码有部分已经被打印,请和MES确认!");
-                    ////    return;
-                    ////}
-                    ///
-                    //新增(string facilityId, string eqpId, string workOrderId, string userId, int requestQty)
-                    string _postBack = Client.getBarCode(_facilityId, _eqpId, _currentOrderNo, _userId, 1);
-                    NewGetBarcode getBarcode = CTool.GetBarCode(_postBack);
-
-                    if (getBarcode.success)
+                    try
                     {
-                        if (getBarcode.result == null)
-                        {
-                            ShowSerMsg("请求失败," + getBarcode.msg);
-                            return;
-                        }
-                        else
-                        {
-                            string _guid = Guid.NewGuid().ToString();
-                            ShowSerMsg("获取MES条码成功," + getBarcode.msg);
-                            IList<string> _ls = (IList<string>)getBarcode.result;
-                            foreach (string _sl in _ls)
-                            {
-                                DbIns.SysDb.ExecuteSql(string.Format("insert into messn(sn,orderno,batchno) values('{0}','{1}','{2}');", _sl, _currentOrderNo, _guid));
-                                // DbIns.SysDb.ExecuteSql(string.Format("insert into mesbak(sn,orderno,batchno) values('{0}','{1}','{2}');", _sl, _currentOrderNor, _guid));
-                            }
+                        ShowSerMsg("请求条码流程开始");
+                        string _postBack = Client.getBarCode(_facilityId, _eqpId, _currentOrderNo, _userId, 1);
+                        NewGetBarcode getBarcode = CTool.GetBarCode(_postBack);
 
-                            if (string.IsNullOrEmpty(_resMesCode))
+                        if (getBarcode.success)
+                        {
+                            if (getBarcode.result == null || getBarcode.result.Count == 0)
                             {
-                                ShowSerMsg("取得MES条码异常:暂无可用的条码,请重试");
+                                ShowSerMsg("请求失败," + getBarcode.msg);
                                 return;
                             }
-                            dt = DbIns.SysDb.ExecuteSql("select * from messn limit 1;").Result as DataTable;
-                            if (dt.Rows.Count > 0)
+                            else
                             {
-                                _resMesCode = dt.Rows[0][0].ToString();
+                                string _guid = Guid.NewGuid().ToString();
+                                foreach (Result1 result1 in getBarcode.result)
+                                {
+                                    DbIns.SysDb.ExecuteSql(string.Format("insert into messn(sn,orderno,batchno) values('{0}','{1}','{2}');", result1.lotId, _currentOrderNo, _guid));
+                                }
+
+                                dt = DbIns.SysDb.ExecuteSql("select * from messn limit 1;").Result as DataTable;
+                                if (dt.Rows.Count > 0)
+                                {
+                                    _resMesCode = dt.Rows[0][0].ToString();
+                                }
+
+                                if (string.IsNullOrEmpty(_resMesCode))
+                                {
+                                    ShowSerMsg("取得MES条码异常:暂无可用的条码,请重试");
+                                    return;
+                                }
                             }
                         }
                     }
+                    catch
+                    {
+                        ShowSerMsg("请求条码MES流程异常！请重新请求！");
+                    }
                 }
+                   
 
-                //ConstData.CurrentMesCode = _resMesCode;
+                ConstData.CurrentMesCode = _resMesCode;
 
-                //ShowSerMsg("取得MES条码:" + _resMesCode + ",动作:打印条码");
-                //时间戳
+                ShowSerMsg("取得MES条码:" + _resMesCode + ",动作:打印条码");
                 TimeSpan ts2 = new TimeSpan(DateTime.Now.Ticks);
                 TimeSpan ts3 = ts2.Subtract(ts1).Duration();
                 try
                 {
-                    //ShowSerMsg(string.Concat("分", ts3.Minutes, "秒", ts3.Seconds));
-                    ////打印机1
-                    //BarTender.Format btFormatPrint = btApp.Formats.Open(_label_1, false, string.Empty);
-                    //btFormatPrint.PrintSetup.Printer = _printer_1;
-                    ////btFormatPrint.PrintSetup.NumberSerializedLabels = 1;                
-                    //btFormatPrint.PrintSetup.IdenticalCopiesOfLabel = 1;
-                    //btFormatPrint.SetNamedSubStringValue("sn", _resMesCode);
-                    //btFormatPrint.PrintOut(false, false);
-                    ////打印机2
-                    //BarTender.Format btFormatPrint2 = btApp.Formats.Open(_label_2, false, string.Empty);
-                    //btFormatPrint2.PrintSetup.Printer = _printer_2;
-                    ////btFormatPrint.PrintSetup.NumberSerializedLabels = 1;                
-                    //btFormatPrint2.PrintSetup.IdenticalCopiesOfLabel = 1;
-                    //btFormatPrint2.SetNamedSubStringValue("sn", _resMesCode);
-                    //btFormatPrint2.PrintOut(false, false);
+                    ShowSerMsg(string.Concat("分", ts3.Minutes, "秒", ts3.Seconds));
+                    //打印机1
+                    BarTender.Format btFormatPrint = btApp.Formats.Open(_label_1, false, string.Empty);
+                    btFormatPrint.PrintSetup.Printer = _printer_1;
+                    //btFormatPrint.PrintSetup.NumberSerializedLabels = 1;                
+                    btFormatPrint.PrintSetup.IdenticalCopiesOfLabel = 1;
+                    btFormatPrint.SetNamedSubStringValue("sn", _resMesCode);
+                    btFormatPrint.PrintOut(false, false);
+                    //打印机2
+                    BarTender.Format btFormatPrint2 = btApp.Formats.Open(_label_2, false, string.Empty);
+                    btFormatPrint2.PrintSetup.Printer = _printer_2;
+                    //btFormatPrint.PrintSetup.NumberSerializedLabels = 1;                
+                    btFormatPrint2.PrintSetup.IdenticalCopiesOfLabel = 1;
+                    btFormatPrint2.SetNamedSubStringValue("sn", _resMesCode);
+                    btFormatPrint2.PrintOut(false, false);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     ShowPtSerMsg(Convert.ToString(e));
                 }
@@ -665,11 +651,11 @@ namespace CommTcper
                     btFormatPrint.SetNamedSubStringValue("sn", ConstData.CurrentMesCode);
                     btFormatPrint.PrintOut(false, false);
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     ShowPtSerMsg(Convert.ToString(e));
                 }
-               
+
 
                 Thread.Sleep(50);
 
@@ -708,7 +694,7 @@ namespace CommTcper
                     btFormatPrint2.PrintOut(false, false);
 
                 }
-                catch(Exception e)
+                catch (Exception e)
                 {
                     ShowPtSerMsg(Convert.ToString(e));
                 }
@@ -1133,12 +1119,12 @@ namespace CommTcper
         {
             try
             {
+                ShowSerMsg("请求工单流程开始");
                 string _postBack = Client.getWorkOrderIdByEqpId(_facilityId, _userId, _eqpId);
                 NewGetBarcodeWork getBarcodeWork = CTool.getWorkOrderIdByEqpId(_postBack);
-                MessageBox.Show(Convert.ToString(getBarcodeWork));
                 if (getBarcodeWork.success)
                 {
-                    if (getBarcodeWork.result == null)
+                    if (getBarcodeWork.result == null || getBarcodeWork.result.Count == 0)
                     {
                         MessageBox.Show("获取MES单号错误," + getBarcodeWork.msg, "通讯程序", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         ShowSerMsg("获取MES单号错误," + getBarcodeWork.msg);
@@ -1146,29 +1132,24 @@ namespace CommTcper
                     }
                     else
                     {
-                        ShowSerMsg("获取MES单号成功," + getBarcodeWork.msg);
-                        IList<string> _ls = (IList<string>)getBarcodeWork.result;
-                        foreach (string _sl in _ls)
+                        foreach (Result2 result in getBarcodeWork.result)
                         {
-                            DbIns.SysDb.ExecuteSql(string.Format("insert into workOrder (workOrderid) values('{0}');", _sl));
-
+                            DbIns.SysDb.ExecuteSql(string.Format("insert into workOrder (workOrderid) values('{0}');", result.workOrderId));
                         }
+                        Orderinit();
                     }
-
-                    Orderinit();
                 }
                 else
                 {
                     ShowSerMsg("获取MES单号失败," + getBarcodeWork.msg);
                 }
             }
-            catch (Exception s)
+            catch
             {
-                MessageBox.Show(Convert.ToString(s));
+                ShowSerMsg("请求工单MES流程异常！请重新请求！");
             }
 
-
-
+            
             //    //IList<string> _ls = new List<string> { "12", "242", "2422" };
             //    //foreach (string _sl in _ls)
             //    //{
@@ -1215,20 +1196,10 @@ namespace CommTcper
             allocation.Show();
         }
 
-
+        private void button3_Click(object sender, EventArgs e)
+        {
+            DbIns.SysDb.ExecuteSql("delete from messn;");
+        }
     }
-    //public class DataGridViewX : DataGridView
-    //{
-    //    protected override void OnPaint(PaintEventArgs e)
-    //    {
-    //        try
-    //        {
-    //            base.OnPaint(e);
-    //        }
-    //        catch
-    //        {
-    //            Invalidate();
-    //        }
-    //    }
-    //}
+   
 }

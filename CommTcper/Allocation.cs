@@ -39,27 +39,27 @@ namespace CommTcper
                     MessageBox.Show("输入格式不对");
                     return false;
                 }
-                IniHelper1.Ini.WriteString("Config", "URL", this.tb_url.Text);
-                IniHelper1.Ini.WriteString("Config", "Userld", this.tb_mUserld.Text);
-                IniHelper1.Ini.WriteString("Config", "Facilityld", this.tb_mFacilityld.Text);
-                IniHelper1.Ini.WriteString("Config", "Eqpld", this.tb_mEqpld.Text);
-                IniHelper1.Ini.WriteString("Modbus", "Address",this.tb_address.Text);
+                IniHelper1.Ini.WriteString("Config", "URL", this.tb_url.Text.Trim());
+                IniHelper1.Ini.WriteString("Config", "Userld", this.tb_mUserld.Text.Trim());
+                IniHelper1.Ini.WriteString("Config", "Facilityld", this.tb_mFacilityld.Text.Trim());
+                IniHelper1.Ini.WriteString("Config", "Eqpld", this.tb_mEqpld.Text.Trim());
+                IniHelper1.Ini.WriteString("Modbus", "Address",this.tb_address.Text.Trim());
                 switch (this.cb_mModel.Text)
                 {
                     case "模型1":
-                        IniHelper1.Ini.WriteString("LableModels", "Model1","Model1-1.btw");
-                        IniHelper1.Ini.WriteString("LableModels", "Mode12", "Model1-2.btw");
+                        IniHelper1.Ini.WriteString("LableModels", "Model1","Model1-1.btw".Trim());
+                        IniHelper1.Ini.WriteString("LableModels", "Model2", "Model1-2.btw".Trim());
                         IniHelper1.Ini.WriteString("LableModels", "SelectMode", "M1");
                         break;
                     case "模型2":
-                        IniHelper1.Ini.WriteString("LableModels", "Model1", "Model2-1.btw");
-                        IniHelper1.Ini.WriteString("LableModels", "Mode12",  "Model2-1.btw");
+                        IniHelper1.Ini.WriteString("LableModels", "Model1", "Model2-1.btw".Trim());
+                        IniHelper1.Ini.WriteString("LableModels", "Model2",  "Model2-1.btw".Trim());
                         IniHelper1.Ini.WriteString("LableModels", "SelectMode", "M2");
                         break;
                     case "模型3":
-                        IniHelper1.Ini.WriteString("LableModels", "Model1",  "Model3-1.btw");
-                        IniHelper1.Ini.WriteString("LableModels", "Mode12",  "Model3-2.btw");
-                        IniHelper1.Ini.WriteString("LableModels", "SelectMode", "M3");
+                        IniHelper1.Ini.WriteString("LableModels", "Model1",  "Model3-1.btw".Trim());
+                        IniHelper1.Ini.WriteString("LableModels", "Model2",  "Model3-2.btw".Trim());
+                        IniHelper1.Ini.WriteString("LableModels", "SelectMode", "M3".Trim());
                         break;
                 }
                 return true;
@@ -129,16 +129,16 @@ namespace CommTcper
                 ConfigurationManager.RefreshSection("system.serviceModel/client");
               
             }
+           
         }
         private void bt_mOK_Click(object sender, EventArgs e)
         {
             bool _bool = Write();
             if (_bool)
             {
+                AppconfigUrl();
                 upShow.Invoke();
                 MessageBox.Show("保存成功");
-               
-                AppconfigUrl();
                 Close();
             }
             else

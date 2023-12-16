@@ -53,7 +53,7 @@
             this.tb_mm.Multiline = true;
             this.tb_mm.Name = "tb_mm";
             this.tb_mm.PasswordChar = '*';
-            this.tb_mm.Size = new System.Drawing.Size(155, 31);
+            this.tb_mm.Size = new System.Drawing.Size(155, 24);
             this.tb_mm.TabIndex = 10;
             // 
             // btn_dqmm

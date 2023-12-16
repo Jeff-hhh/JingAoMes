@@ -188,7 +188,7 @@ namespace Module_PLCCommFast
             else
             {
                 result = int.MaxValue;
-                PushData ="PLC失败指令"+ modbusTcp.ReadInt32(address).Message;
+                PushData = "PLC失败指令" + modbusTcp.ReadInt32(address).Message;
                 PushEvent();
             }
             return result;

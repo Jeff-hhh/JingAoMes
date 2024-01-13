@@ -63,6 +63,7 @@ namespace CommTcper
                         break;
                 }
                 return true;
+                
             }
             catch
             {

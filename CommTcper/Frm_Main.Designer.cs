@@ -819,7 +819,7 @@
             this.cb_DataFormat.Name = "cb_DataFormat";
             this.cb_DataFormat.Size = new System.Drawing.Size(121, 20);
             this.cb_DataFormat.TabIndex = 12;
-            this.cb_DataFormat.Text = "BADC";
+            this.cb_DataFormat.Text = "CDAB";
             // 
             // label16
             // 
@@ -929,7 +929,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(1338, 771);
+            this.ClientSize = new System.Drawing.Size(1337, 778);
             this.Controls.Add(this.groupBox7);
             this.Controls.Add(this.bt_Rest);
             this.Controls.Add(this.label11);

@@ -56,10 +56,10 @@
             // 
             // btn_cx
             // 
-            this.btn_cx.Location = new System.Drawing.Point(16, 28);
+            this.btn_cx.Location = new System.Drawing.Point(14, 23);
             this.btn_cx.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_cx.Name = "btn_cx";
-            this.btn_cx.Size = new System.Drawing.Size(92, 38);
+            this.btn_cx.Size = new System.Drawing.Size(82, 32);
             this.btn_cx.TabIndex = 12;
             this.btn_cx.Text = "查询";
             this.btn_cx.UseVisualStyleBackColor = true;
@@ -67,10 +67,10 @@
             // 
             // btn_dyjl
             // 
-            this.btn_dyjl.Location = new System.Drawing.Point(114, 28);
+            this.btn_dyjl.Location = new System.Drawing.Point(101, 23);
             this.btn_dyjl.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_dyjl.Name = "btn_dyjl";
-            this.btn_dyjl.Size = new System.Drawing.Size(92, 38);
+            this.btn_dyjl.Size = new System.Drawing.Size(82, 32);
             this.btn_dyjl.TabIndex = 19;
             this.btn_dyjl.Text = "导出";
             this.btn_dyjl.UseVisualStyleBackColor = true;
@@ -86,83 +86,83 @@
             this.pagerControl1.DataGridView = null;
             this.pagerControl1.DataSource = null;
             this.pagerControl1.ItemForeColor = System.Drawing.SystemColors.ControlText;
-            this.pagerControl1.Location = new System.Drawing.Point(6, 22);
-            this.pagerControl1.Margin = new System.Windows.Forms.Padding(6);
+            this.pagerControl1.Location = new System.Drawing.Point(5, 18);
+            this.pagerControl1.Margin = new System.Windows.Forms.Padding(5);
             this.pagerControl1.Name = "pagerControl1";
             this.pagerControl1.PageCount = 0;
             this.pagerControl1.PageSize = 100;
-            this.pagerControl1.Size = new System.Drawing.Size(1461, 50);
+            this.pagerControl1.Size = new System.Drawing.Size(1299, 42);
             this.pagerControl1.TabIndex = 20;
             // 
             // dtpk_qs
             // 
-            this.dtpk_qs.Location = new System.Drawing.Point(310, 30);
-            this.dtpk_qs.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.dtpk_qs.Location = new System.Drawing.Point(276, 25);
+            this.dtpk_qs.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dtpk_qs.Name = "dtpk_qs";
-            this.dtpk_qs.Size = new System.Drawing.Size(181, 28);
+            this.dtpk_qs.Size = new System.Drawing.Size(161, 25);
             this.dtpk_qs.TabIndex = 22;
             // 
             // dtpk_js
             // 
-            this.dtpk_js.Location = new System.Drawing.Point(502, 30);
-            this.dtpk_js.Margin = new System.Windows.Forms.Padding(4, 6, 4, 6);
+            this.dtpk_js.Location = new System.Drawing.Point(446, 25);
+            this.dtpk_js.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.dtpk_js.Name = "dtpk_js";
-            this.dtpk_js.Size = new System.Drawing.Size(186, 28);
+            this.dtpk_js.Size = new System.Drawing.Size(166, 25);
             this.dtpk_js.TabIndex = 24;
             // 
             // lb_qs
             // 
             this.lb_qs.AutoSize = true;
-            this.lb_qs.Location = new System.Drawing.Point(213, 36);
+            this.lb_qs.Location = new System.Drawing.Point(189, 30);
             this.lb_qs.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lb_qs.Name = "lb_qs";
-            this.lb_qs.Size = new System.Drawing.Size(89, 18);
+            this.lb_qs.Size = new System.Drawing.Size(75, 15);
             this.lb_qs.TabIndex = 23;
             this.lb_qs.Text = "创建日期:";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(723, 39);
+            this.label1.Location = new System.Drawing.Point(643, 32);
             this.label1.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(53, 18);
+            this.label1.Size = new System.Drawing.Size(45, 15);
             this.label1.TabIndex = 25;
             this.label1.Text = "条码:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(981, 39);
+            this.label2.Location = new System.Drawing.Point(872, 32);
             this.label2.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 18);
+            this.label2.Size = new System.Drawing.Size(45, 15);
             this.label2.TabIndex = 26;
             this.label2.Text = "工单:";
             // 
             // textBox1
             // 
-            this.textBox1.Location = new System.Drawing.Point(784, 32);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox1.Location = new System.Drawing.Point(697, 27);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(186, 28);
+            this.textBox1.Size = new System.Drawing.Size(166, 25);
             this.textBox1.TabIndex = 27;
             // 
             // textBox2
             // 
-            this.textBox2.Location = new System.Drawing.Point(1028, 34);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4);
+            this.textBox2.Location = new System.Drawing.Point(914, 28);
+            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(156, 28);
+            this.textBox2.Size = new System.Drawing.Size(139, 25);
             this.textBox2.TabIndex = 28;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(1176, 38);
+            this.label3.Location = new System.Drawing.Point(1045, 32);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(53, 18);
+            this.label3.Size = new System.Drawing.Size(45, 15);
             this.label3.TabIndex = 29;
             this.label3.Text = "班别:";
             // 
@@ -174,18 +174,18 @@
             "全部",
             "白班",
             "夜班"});
-            this.cmb_bb.Location = new System.Drawing.Point(1252, 33);
-            this.cmb_bb.Margin = new System.Windows.Forms.Padding(4);
+            this.cmb_bb.Location = new System.Drawing.Point(1113, 27);
+            this.cmb_bb.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.cmb_bb.Name = "cmb_bb";
-            this.cmb_bb.Size = new System.Drawing.Size(124, 26);
+            this.cmb_bb.Size = new System.Drawing.Size(111, 23);
             this.cmb_bb.TabIndex = 30;
             // 
             // btn_qktm
             // 
-            this.btn_qktm.Location = new System.Drawing.Point(1386, 28);
+            this.btn_qktm.Location = new System.Drawing.Point(1232, 23);
             this.btn_qktm.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btn_qktm.Name = "btn_qktm";
-            this.btn_qktm.Size = new System.Drawing.Size(92, 38);
+            this.btn_qktm.Size = new System.Drawing.Size(82, 32);
             this.btn_qktm.TabIndex = 31;
             this.btn_qktm.Text = "清空";
             this.btn_qktm.UseVisualStyleBackColor = true;
@@ -207,19 +207,19 @@
             this.panel1.Controls.Add(this.textBox1);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
             this.panel1.Location = new System.Drawing.Point(0, 0);
-            this.panel1.Margin = new System.Windows.Forms.Padding(4);
+            this.panel1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1497, 87);
+            this.panel1.Size = new System.Drawing.Size(1331, 72);
             this.panel1.TabIndex = 32;
             // 
             // panel2
             // 
             this.panel2.Controls.Add(this.pagerControl1);
             this.panel2.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel2.Location = new System.Drawing.Point(0, 652);
-            this.panel2.Margin = new System.Windows.Forms.Padding(4);
+            this.panel2.Location = new System.Drawing.Point(0, 543);
+            this.panel2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(1497, 78);
+            this.panel2.Size = new System.Drawing.Size(1331, 65);
             this.panel2.TabIndex = 33;
             // 
             // skinDataGridView1
@@ -260,8 +260,8 @@
             this.skinDataGridView1.GridColor = System.Drawing.SystemColors.MenuHighlight;
             this.skinDataGridView1.HeadFont = new System.Drawing.Font("宋体", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.skinDataGridView1.HeadSelectForeColor = System.Drawing.SystemColors.HighlightText;
-            this.skinDataGridView1.Location = new System.Drawing.Point(6, 75);
-            this.skinDataGridView1.Margin = new System.Windows.Forms.Padding(4);
+            this.skinDataGridView1.Location = new System.Drawing.Point(5, 62);
+            this.skinDataGridView1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.skinDataGridView1.Name = "skinDataGridView1";
             this.skinDataGridView1.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.skinDataGridView1.RowHeadersWidth = 62;
@@ -273,7 +273,7 @@
             this.skinDataGridView1.RowsDefaultCellStyle = dataGridViewCellStyle4;
             this.skinDataGridView1.RowTemplate.DefaultCellStyle.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.skinDataGridView1.RowTemplate.Height = 18;
-            this.skinDataGridView1.Size = new System.Drawing.Size(1486, 568);
+            this.skinDataGridView1.Size = new System.Drawing.Size(1321, 473);
             this.skinDataGridView1.SkinGridColor = System.Drawing.SystemColors.MenuHighlight;
             this.skinDataGridView1.TabIndex = 34;
             this.skinDataGridView1.TitleBack = null;
@@ -283,14 +283,14 @@
             // 
             // Frm_Query
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 18F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1497, 730);
+            this.ClientSize = new System.Drawing.Size(1331, 608);
             this.Controls.Add(this.skinDataGridView1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.Name = "Frm_Query";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "查询看板";

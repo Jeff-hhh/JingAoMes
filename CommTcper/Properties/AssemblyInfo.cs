@@ -5,8 +5,8 @@ using System.Runtime.InteropServices;
 // 有关程序集的一般信息由以下
 // 控制。更改这些特性值可修改
 // 与程序集关联的信息。
-[assembly: AssemblyTitle("CommTcper.2023/12/20/1.1")]
-[assembly: AssemblyDescription("晶澳1.1")]
+[assembly: AssemblyTitle("CommTcper.2024/1/13")]
+[assembly: AssemblyDescription("晶澳1.5COM组件")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("AODEL")]
 [assembly: AssemblyProduct("CommTcper")]

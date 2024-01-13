@@ -10,12 +10,15 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace CommTcper
 {
     public partial class Frm_Query : Form
     {
+       
+      
         private string _sql { get; set; }
-
+        private string _workde { get; set; }
         public Frm_Query()
         {
             InitializeComponent();
@@ -23,10 +26,11 @@ namespace CommTcper
             dtpk_qs.CustomFormat = "yyyy-MM-dd";
             dtpk_js.Format = DateTimePickerFormat.Custom;
             dtpk_js.CustomFormat = "yyyy-MM-dd";
-            _sql = "select tm 时间,sn 组件号,orderno 工单,'等待中' 打印状态,'' 打印机名称,'' 打印结果,0 打印次数,'' 比对条码1,'' 比对条码2,'无' 比对条码结果,case when time(current_time,'localtime') between '08:00:00' and '20:00:00' then '白班' else '夜班' end 班别,'' 消息 from messn where 1=1 {0}";
+            _sql = "select tm 时间,sn 组件号,orderno 工单,'等待中' 打印状态,'' 打印机名称,'' 打印结果,0 打印次数,'' 比对条码1,'' 比对条码2,'无' 比对条码结果,case when time(current_time,'localtime') between '08:00:00' and '20:00:00' then '白班' else '夜班' end 班别,'' 过账 from messn where 1=1 {0}";
             cmb_bb.SelectedIndex = 0;
+            _workde = "select workOrderid 打印状态 form workOrder";
         }
-
+    
         private void btn_cx_Click(object sender, EventArgs e)
         {
             string sw = string.Empty;
@@ -47,12 +51,13 @@ namespace CommTcper
                 sw += " and (case when time(tm) between '08:00:00' and '20:00:00' then '白班' else '夜班' end) = '" + cmb_bb.Text + "' ";
                 swl += " and (case when time(current_time,'localtime') between '08:00:00' and '20:00:00' then '白班' else '夜班' end) = '" + cmb_bb.Text + "' ";
             }
-            DataTable _dt = DbIns.SysDb.ExecuteSql(string.Format(_sql + " union all " + string.Format("select tm 时间,sn 组件号,orderno 工单,'已完成' 打印状态,pts 打印机名称,ptsts 打印结果,ptms 打印次数,sn 比对条码1,sn 比对条码2,'OK' 比对条码结果,case when time(tm) between '08:00:00' and '20:00:00' then '白班' else '夜班' end 班别,'' 消息 from mesprint where 1=1 {0} order by tm desc;", sw), swl)).Result as DataTable;
+            DataTable _dt = DbIns.SysDb.ExecuteSql(string.Format(_sql + " union all " + string.Format("select tm 时间,sn 组件号,orderno 工单,'已完成' 打印状态,pts 打印机名称,ptsts 打印结果,ptms 打印次数,sn 比对条码1,sn 比对条码2,'OK' 比对条码结果,case when time(tm) between '08:00:00' and '20:00:00' then '白班' else '夜班' end 班别 ,workOrder 过账 from mesprint where 1=1 {0} order by tm desc;", sw),swl)).Result as DataTable;
             skinDataGridView1.DataSource = _dt;
             //skinDataGridView1.Columns[0].Width = 150;
             skinDataGridView1.Columns[1].Width = 150;
             pagerControl1.DataGridView = skinDataGridView1;
             pagerControl1.DataSource = _dt;
+
         }
 
         private void btn_dyjl_Click(object sender, EventArgs e)
@@ -78,7 +83,7 @@ namespace CommTcper
                     sw += " and (case when time(tm) between '08:00:00' and '20:00:00' then '白班' else '夜班' end) = '" + cmb_bb.Text + "' ";
                     swl += " and (case when time(current_time,'localtime') between '08:00:00' and '20:00:00' then '白班' else '夜班' end) = '" + cmb_bb.Text + "' ";
                 }
-                DataTable _dt = DbIns.SysDb.ExecuteSql(string.Format(_sql + " union all " + string.Format("select tm 时间,sn 组件号,orderno 工单,'已完成' 打印状态,pts 打印机名称,ptsts 打印结果,ptms 打印次数,sn 比对条码1,sn 比对条码2,'OK' 比对条码结果,case when time(tm) between '08:00:00' and '20:00:00' then '白班' else '夜班' end 班别,'' 消息 from mesprint where 1=1 {0} order by tm desc;", sw), swl)).Result as DataTable;
+                DataTable _dt = DbIns.SysDb.ExecuteSql(string.Format(_sql + " union all " + string.Format("select tm 时间,sn 组件号,orderno 工单,'已完成' 打印状态,pts 打印机名称,ptsts 打印结果,ptms 打印次数,sn 比对条码1,sn 比对条码2,'OK' 比对条码结果,case when time(tm) between '08:00:00' and '20:00:00' then '白班' else '夜班' end 班别,workOrder 过账 from mesprint where 1=1 {0} order by tm desc;", sw), swl)).Result as DataTable;
                 if (_dt.Rows.Count > 0)
                 {
                     string _dir = Application.StartupPath + "\\History\\";
@@ -93,13 +98,16 @@ namespace CommTcper
                     MessageBox.Show("无待导出数据!", "导出失败", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
                 btn_dyjl.Enabled = true;
+
+
             }));
         }
 
         private void Frm_Query_Load(object sender, EventArgs e)
         {
             WindowState = FormWindowState.Maximized;
-            btn_cx_Click(null, null);
+             btn_cx_Click(null, null);
+     
         }
 
         private void btn_qktm_Click(object sender, EventArgs e)

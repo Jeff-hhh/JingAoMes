@@ -21,6 +21,7 @@ using WebServiceTool.AppComm;
 using System.Reflection;
 using WebServiceTool.AppComm.Enity;
 using WebServiceTool.AppComm.Tool;
+using Seagull.BarTender.Print;
 namespace CommTcper
 {
 
@@ -28,7 +29,6 @@ namespace CommTcper
     {
         private string _labelPath { get; set; }
         private Queue _queue_1 { get; set; }
-        private BarTender.Application btApp { get; set; }
         private string _label_1 { get; set; }
         private string _label_2 { get; set; }
 
@@ -82,7 +82,7 @@ namespace CommTcper
             InitializeComponent();
             CheckForIllegalCrossThreadCalls = false;
             //dgv_sytm = new DataGridViewX();
-            
+
             Client = new JobManagementWebServiceClient();
             _currentOrderNo = "";
             btn_qhgd.Enabled = false;
@@ -100,7 +100,7 @@ namespace CommTcper
         {
             Stopwatch sw1 = new Stopwatch();
             sw1.Start();
-             bt_clear.Enabled=  bt_connScan.Enabled = bt_connMo.Enabled = tb_nbstop.Enabled = tb_number.Enabled = tb_number.Enabled = tb_gdh.Enabled = tb_serip.Enabled = tb_serport.Enabled = tb_ptserip.Enabled = tb_ptserport.Enabled = false;
+            bt_clear.Enabled = bt_connScan.Enabled = bt_connMo.Enabled = tb_nbstop.Enabled = tb_number.Enabled = tb_number.Enabled = tb_gdh.Enabled = tb_serip.Enabled = tb_serport.Enabled = tb_ptserip.Enabled = tb_ptserport.Enabled = false;
             bt_cancel.Enabled = bt_Rest.Enabled = comboBox1.Enabled = btn_dyjl.Enabled = bt_can.Enabled = btn_qdgd.Enabled = btn_connptser.Enabled = bt_cancel.Enabled = false;
             tb_eqpIdmain.Enabled = tb_facilityIdmian.Enabled = tb_labelModemian.Enabled = tb_urlmian.Enabled = tb_urlmian.Enabled = tb_userldmain.Enabled = false;
             button2.Enabled = tb_address.Enabled = tb_MoIp.Enabled = tb_MoPort.Enabled = tb_ScanIp.Enabled = tb_ScanPort.Enabled = cb_DataFormat.Enabled = false;
@@ -122,7 +122,7 @@ namespace CommTcper
             _labelPath = string.Concat(Application.StartupPath, "\\labels");
             _queue_1 = new Queue();
             sw1.Stop();
-            Console.WriteLine("配置加载"+sw1.ElapsedMilliseconds.ToString());
+            Console.WriteLine("配置加载" + sw1.ElapsedMilliseconds.ToString());
             //新增
             sw1.Restart();
             ConstData.CurrenScanCode = String.Empty;
@@ -153,7 +153,6 @@ namespace CommTcper
             _facilityId = tb_facilityIdmian.Text;
             _eqpId = tb_eqpIdmain.Text;
             _userId = tb_userldmain.Text;
-            btApp = new BarTender.Application();
             sw1.Stop();
             Console.WriteLine("INI" + sw1.ElapsedMilliseconds.ToString());
             sw1.Restart();
@@ -250,7 +249,7 @@ namespace CommTcper
                     if (data == 1)
                     {
                         ShowMsgScan("收到PLC指令" + data);
-                        modbusTcp.WriteInt(_address,0);
+                        modbusTcp.WriteInt(_address, 0);
                         if (!scanSer)
                         {
                             ShowMsgScan("扫码枪通讯异常！");
@@ -267,18 +266,20 @@ namespace CommTcper
                             {
                                 ShowMsgScan("过账流程开始");
                                 string _postBack = Client.dispatchLotForDC(_facilityId, _userId, _eqpId, ConstData.CurrenScanCode);
-                                ShowMsgScan("发送过账参数"+string.Concat(_facilityId,_userId,_eqpId,ConstData.CurrenScanCode));
+                                ShowMsgScan("发送过账参数" + string.Concat(_facilityId, _userId, _eqpId, ConstData.CurrenScanCode));
                                 NewGetBarcode getBarcode = CTool.GetBarCode(_postBack);
                                 Thread.Sleep(200);
                                 if (getBarcode.success)
                                 {
                                     ShowMsgScan("过账成功:" + getBarcode.msg);
-                                    modbusTcp.WriteInt("7502",1);
+                                    modbusTcp.WriteInt("7502", 1);
                                     DbIns.SysDb.ExecuteSql("update mesprint set workOrder='" + ConstData.CurrenScanCode + "'where sn='" + ConstData.CurrenScanCode + "';");
 
                                 }
-                                else { ShowMsgScan("过账异常:" + getBarcode.msg); modbusTcp.WriteInt("7504",1);
-                                   
+                                else
+                                {
+                                    ShowMsgScan("过账异常:" + getBarcode.msg); modbusTcp.WriteInt("7504", 1);
+
                                     DbIns.SysDb.ExecuteSql("update mesprint set workOrder='" + ng + "'where sn='" + ConstData.CurrenScanCode + "';");
 
                                 }
@@ -286,11 +287,11 @@ namespace CommTcper
                             }
                             catch
                             {
-                                
-                                modbusTcp.WriteInt("7504",1);
+
+                                modbusTcp.WriteInt("7504", 1);
                                 DbIns.SysDb.ExecuteSql("update mesprint set workOrder='" + ng + "'where sn='" + ConstData.CurrenScanCode + "';");
                                 ShowMsgScan("过账MES请求异常！请重新请求！");
-                                
+
                             }
                             finally
                             {
@@ -299,9 +300,9 @@ namespace CommTcper
                         }
                         else
                         {
-                            modbusTcp.WriteInt("7504",1);
+                            modbusTcp.WriteInt("7504", 1);
                             ShowMsgScan("扫码枪指令异常:" + ConstData.CurrenScanCode);
-                          
+
                         }
                     }
                     await Task.Delay(200); // 轮询200ms
@@ -365,13 +366,13 @@ namespace CommTcper
         {
             try
             {
-              
+
                 if (string.IsNullOrEmpty(str))
                 {
                     ShowMsgScan("扫码枪通信异常");
                     return;
                 }
-                string  str1 = str.Trim();
+                string str1 = str.Trim();
                 string[] result = str1.Split(',');
                 if (result[0].Equals("OK"))
                 {
@@ -389,7 +390,7 @@ namespace CommTcper
             {
 
             }
-           
+
         }
         //-------------------------------------
 
@@ -454,9 +455,9 @@ namespace CommTcper
         {
             lock (_Lockobj)
             {
-                    if (tb_Scan.Lines.GetUpperBound(0) >= 1000)
-                        tb_Scan.Clear();
-                    tb_Scan.AppendText("[" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "]->" + str );
+                if (tb_Scan.Lines.GetUpperBound(0) >= 1000)
+                    tb_Scan.Clear();
+                tb_Scan.AppendText("[" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "]->" + str);
             }
         }
         private void ShowSerMsgForPrinter_1(string str)
@@ -521,7 +522,7 @@ namespace CommTcper
                 tb_sermsg.Clear();
             tb_sermsg.AppendText("[" + DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss.fff") + "]->" + str + Environment.NewLine);
         }
-
+        private object obj1 = new object();
         private void ProcReqCommand(string str)
         {
             if (string.IsNullOrEmpty(str))
@@ -531,327 +532,340 @@ namespace CommTcper
                 Thread.Sleep(1000);
                 return;
             }
-            if (tb_nbstop.Text == lb_yz.Text)
+            lock (obj1)
             {
-                MessageBox.Show("已打印数量到达截止线", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
-            if (str.Equals("1"))
-            {
-                if (_currentOrderNo == "")
-                {
-                    ShowSerMsg("当前无订单号,不可打印");
-                    return;
-                }
-                ShowSerMsg("处理指令码:" + str + ",动作:向MES请求条码");
-                TimeSpan ts1 = new TimeSpan(DateTime.Now.Ticks);
-                string _resMesCode = string.Empty;
-                DataTable dt = DbIns.SysDb.ExecuteSql("select * from messn limit 1;").Result as DataTable;
-                DataTable dt1 = DbIns.SysDb.ExecuteSql("select 1 from messn;").Result as DataTable;
-                int _number = Convert.ToInt32(tb_number.Text);
-                if (dt1.Rows.Count > _number)
-                {
-                    if (dt.Rows.Count > 0)
-                    {
-                        _resMesCode = dt.Rows[0][0].ToString();
-                    }
-                    ShowSerMsg("数据库已有未打印缓存" + _resMesCode);
-                    return;
-                }
-                else
-                {
-                    try
-                    {
-                        ShowSerMsg("请求条码流程开始");
-                        string _postBack = Client.getBarCode(_facilityId, _eqpId, _currentOrderNo, _userId, 1);
-                        NewGetBarcode getBarcode = CTool.GetBarCode(_postBack);
-                        Thread.Sleep(200);
-                        if (getBarcode.success)
-                        {
-                            if (getBarcode.result == null || getBarcode.result.Count == 0)
-                            {
-                                ShowSerMsg("请求失败," + getBarcode.msg);
-                                return;
-                            }
-                            else
-                            {
-                                string _guid = Guid.NewGuid().ToString();
-                                foreach (Result1 result1 in getBarcode.result)
-                                {
-                                    DbIns.SysDb.ExecuteSql(string.Format("insert into messn(sn,orderno,batchno) values('{0}','{1}','{2}');", result1.lotId, _currentOrderNo, _guid));
-                                }
 
-                                dt = DbIns.SysDb.ExecuteSql("select * from messn limit 1;").Result as DataTable;
-                                if (dt.Rows.Count > 0)
-                                {
-                                    _resMesCode = dt.Rows[0][0].ToString();
-                                }
 
-                            }
-                        }
-                    }
-                    catch
-                    {
-                        ShowSerMsg("请求条码MES流程异常！请重新请求！");
-                    }
-                    ////不通过mes测试
-                    //string _guid = Guid.NewGuid().ToString();
-                    //DbIns.SysDb.ExecuteSql(string.Format("insert into messn(sn,orderno,batchno) values('{0}','{1}','{2}');", "15154155", _currentOrderNo, _guid));
-                    //dt = DbIns.SysDb.ExecuteSql("select * from messn limit 1;").Result as DataTable;
-                    //if (dt.Rows.Count > 0)
-                    //{
-                    //    _resMesCode = dt.Rows[0][0].ToString();
-                    //}
-
-                }
-                if (string.IsNullOrEmpty(_resMesCode))
-                {
-                    ShowSerMsg("取得MES条码异常:暂无可用的条码,请重试");
-                    return;
-                }
-                ConstData.CurrentMesCode = _resMesCode;
-                ShowSerMsg("取得MES条码:" + _resMesCode + ",动作:打印条码");
-                TimeSpan ts2 = new TimeSpan(DateTime.Now.Ticks);
-                TimeSpan ts3 = ts2.Subtract(ts1).Duration();
-                try
-                {
-                    ShowSerMsg(string.Concat("分", ts3.Minutes, "秒", ts3.Seconds));
-                    //打印机1
-                    BarTender.Format btFormatPrint = btApp.Formats.Open(_label_1, false, string.Empty);
-                    btFormatPrint.PrintSetup.Printer = _printer_1;
-                    //btFormatPrint.PrintSetup.NumberSerializedLabels = 1;                
-                    btFormatPrint.PrintSetup.IdenticalCopiesOfLabel = 1;
-                    btFormatPrint.SetNamedSubStringValue("sn", _resMesCode);
-                    btFormatPrint.PrintOut(false, false);
-                    btFormatPrint.Close(BarTender.BtSaveOptions.btDoNotSaveChanges);
-                    ShowPtSerMsg("A打印完成");
-                    //打印机2
-                    Thread.Sleep(100);
-                    BarTender.Format btFormatPrint2 = btApp.Formats.Open(_label_2, false, string.Empty);
-                    btFormatPrint2.PrintSetup.Printer = _printer_2;
-                    //btFormatPrint.PrintSetup.NumberSerializedLabels = 1;                
-                    btFormatPrint2.PrintSetup.IdenticalCopiesOfLabel = 1;
-                    btFormatPrint2.SetNamedSubStringValue("sn", _resMesCode);
-                    btFormatPrint2.PrintOut(false, false);
-                    btFormatPrint2.Close(BarTender.BtSaveOptions.btDoNotSaveChanges);
-                    ShowPtSerMsg("B打印完成");
-                }
-                catch (Exception e)
-                {
-                    ShowPtSerMsg(e.ToString());                 
-                    return;
-                }
-
-                Thread.Sleep(50);
-
-                ConstData.PrevCurrentPrinterMessage_1 = ConstData.CurrentPrinterMessage_1;
-                ConstData.PrevCurrentPrinterMessage_2 = ConstData.CurrentPrinterMessage_2;
-
-                ShowPtSerMsg("发送MES条码:" + _resMesCode);
-                MixCilentCx.Send(string.Concat("S,", _resMesCode));
-                Thread.Sleep(150);
-
-                ShowSerMsg("读取到打印状态码(GA)并发送:" + ConstData.CurrentPrinterMessage_1);
-               
-                Thread.Sleep(100);
-                MixCilentCx.Send(string.Concat("GA,", ConstData.CurrentPrinterMessage_1));
-               
-                Thread.Sleep(100);
-                //阻塞线程1
-                MixCilentCx.Send(string.Concat("L,1"));
-                Thread.Sleep(50);
-                MixCilentCx.Send(string.Concat("GA,", ConstData.CurrentPrinterMessage_1));
-               
-                Thread.Sleep(100);
-                ShowSerMsg("读取到打印状态码(GB)并发送:" + ConstData.CurrentPrinterMessage_2);
-                Thread.Sleep(100);
-                MixCilentCx.Send(string.Concat("GB,", ConstData.CurrentPrinterMessage_2));
-
-                Thread.Sleep(150);
-                //阻塞线程2
-              
-                MixCilentCx.Send(string.Concat("Z,2"));
-                Thread.Sleep(50);
-                MixCilentCx.Send(string.Concat("GB,", ConstData.CurrentPrinterMessage_2));
-                //打印机出码时间
-                TimeSpan ts4 = new TimeSpan(DateTime.Now.Ticks);
-                TimeSpan ts5 = ts4.Subtract(ts3).Duration();
-                ShowSerMsg(string.Concat("出码时间" + "分", ts5.Minutes, "秒", ts5.Seconds));
-                DbIns.SysDb.ExecuteSql("insert into mesprint(sn,orderno,batchno,ptsts,pts) select sn,orderno,batchno,'" + ConstData.CurrentPrinterMessage_1 + "','" + _printer_1 + "' from messn where sn='" + _resMesCode + "';");
-                DbIns.SysDb.ExecuteSql("insert into mesprint(sn,orderno,batchno,ptsts,pts) select sn,orderno,batchno,'" + ConstData.CurrentPrinterMessage_2 + "','" + _printer_2 + "' from messn where sn='" + _resMesCode + "';");
-                DbIns.SysDb.ExecuteSql("delete from messn where sn='" + _resMesCode + "';");
-                string pms = " and tm between '" + DateTime.Now.ToString("yyyy-MM-dd") + " 08:00:00' and '" + DateTime.Now.ToString("yyyy-MM-dd") + " 20:00:00' ";
-                if (!CheckBb())
-                {
-                    if (!ck_dis.Checked)
-                    {
-                        pms = " and tm between '" + DateTime.Now.ToString("yyyy-MM-dd") + " 20:00:00' and '" + DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59' ";
-                    }
-                    else
-                    {
-                        pms = " and tm between '" + DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd") + " 20:00:00' and '" + DateTime.Now.ToString("yyyy-MM-dd") + " 08:00:00' ";
-                    }
-                }
-                DataTable _dtp = DbIns.SysDb.ExecuteSql("select 1 from mesprint where orderno='" + _currentOrderNo + "' " + pms + ";").Result as DataTable;
-                DataTable _dtinner = DbIns.SysDb.ExecuteSql("select sn 条码,orderno 订单号 from messn where orderno='" + _currentOrderNo + "';").Result as DataTable;
-                lb_yz.Text = (_dtp.Rows.Count / 2).ToString();
-                lb_sy.Text = _dtinner.Rows.Count.ToString();
                 if (tb_nbstop.Text == lb_yz.Text)
                 {
                     MessageBox.Show("已打印数量到达截止线", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
-                //dgv_sytm.DataSource = _dtinner;
-            }
-            else if (str.Equals("2"))
-            {
-                ShowSerMsg("处理指令码:" + str + ",动作:GA打印机重复打印");
-                if (string.IsNullOrEmpty(ConstData.CurrentMesCode))
+                if (str.Equals("1"))
                 {
-                    ShowSerMsg("未找到上次发送的条码");
-                    return;
-                }
-                try
-                {
+                    if (_currentOrderNo == "")
+                    {
+                        ShowSerMsg("当前无订单号,不可打印");
+                        return;
+                    }
+                    ShowSerMsg("处理指令码:" + str + ",动作:向MES请求条码");
+                    TimeSpan ts1 = new TimeSpan(DateTime.Now.Ticks);
+                    string _resMesCode = string.Empty;
+                    DataTable dt = DbIns.SysDb.ExecuteSql("select * from messn limit 1;").Result as DataTable;
+                    DataTable dt1 = DbIns.SysDb.ExecuteSql("select 1 from messn;").Result as DataTable;
+                    int _number = Convert.ToInt32(tb_number.Text);
+                    if (dt1.Rows.Count > _number)
+                    {
+                        if (dt.Rows.Count > 0)
+                        {
+                            _resMesCode = dt.Rows[0][0].ToString();
+                        }
+                        ShowSerMsg("数据库已有未打印缓存" + _resMesCode);
+                        return;
+                    }
+                    else
+                    {
+                        try
+                        {
+                            ShowSerMsg("请求条码流程开始");
+                            string _postBack = Client.getBarCode(_facilityId, _eqpId, _currentOrderNo, _userId, 1);
+                            NewGetBarcode getBarcode = CTool.GetBarCode(_postBack);
+                            Thread.Sleep(200);
+                            if (getBarcode.success)
+                            {
+                                if (getBarcode.result == null || getBarcode.result.Count == 0)
+                                {
+                                    ShowSerMsg("请求失败," + getBarcode.msg);
+                                    return;
+                                }
+                                else
+                                {
+                                    string _guid = Guid.NewGuid().ToString();
+                                    foreach (Result1 result1 in getBarcode.result)
+                                    {
+                                        DbIns.SysDb.ExecuteSql(string.Format("insert into messn(sn,orderno,batchno) values('{0}','{1}','{2}');", result1.lotId, _currentOrderNo, _guid));
+                                    }
+
+                                    dt = DbIns.SysDb.ExecuteSql("select * from messn limit 1;").Result as DataTable;
+                                    if (dt.Rows.Count > 0)
+                                    {
+                                        _resMesCode = dt.Rows[0][0].ToString();
+                                    }
+
+                                }
+                            }
+                        }
+                        catch
+                        {
+                            ShowSerMsg("请求条码MES流程异常！请重新请求！");
+                        }
+                        ////不通过mes测试
+                        //string _guid = Guid.NewGuid().ToString();
+                        //DbIns.SysDb.ExecuteSql(string.Format("insert into messn(sn,orderno,batchno) values('{0}','{1}','{2}');", "15154155", _currentOrderNo, _guid));
+                        //dt = DbIns.SysDb.ExecuteSql("select * from messn limit 1;").Result as DataTable;
+                        //if (dt.Rows.Count > 0)
+                        //{
+                        //    _resMesCode = dt.Rows[0][0].ToString();
+                        //}
+
+                    }
+                    if (string.IsNullOrEmpty(_resMesCode))
+                    {
+                        ShowSerMsg("取得MES条码异常:暂无可用的条码,请重试");
+                        return;
+                    }
+                    ConstData.CurrentMesCode = _resMesCode;
+                    ShowSerMsg("取得MES条码:" + _resMesCode + ",动作:打印条码");
+                    try
+                    {
+
+                        //打印机1
+                        using (Engine engine = new Engine(true))
+                        {
+                            LabelFormatDocument btformat = engine.Documents.Open(_label_1);
+                            btformat.SubStrings["sn"].Value = _resMesCode;
+                            btformat.PrintSetup.PrinterName = _printer_1;
+                            btformat.PrintSetup.IdenticalCopiesOfLabel = 1;
+                            Result result= btformat.Print();
+                            btformat.Close(SaveOptions.DoNotSaveChanges);
+                            Thread.Sleep(50);
+                            //打印机2
+                            LabelFormatDocument btformat1 = engine.Documents.Open(_label_2);
+                            btformat1.SubStrings["sn"].Value = _resMesCode;
+                            btformat1.PrintSetup.PrinterName = _printer_2;
+                            btformat1.PrintSetup.IdenticalCopiesOfLabel = 1;
+                            Result result1= btformat1.Print();
+                            btformat1.Close(SaveOptions.DoNotSaveChanges);
+                         
+                            engine.Stop();
+
+                        }
+                        ShowPtSerMsg("AB打印打印完成");
+                    }
+                    catch (Exception e)
+                    {
+                        ShowPtSerMsg(e.ToString());
+                        return;
+                    }
+
                     Thread.Sleep(50);
-                    BarTender.Format btFormatPrint = btApp.Formats.Open(_label_1, false, string.Empty);
-                    btFormatPrint.PrintSetup.Printer = _printer_1;
-                    btFormatPrint.SetNamedSubStringValue("sn", ConstData.CurrentMesCode);
-                    btFormatPrint.PrintOut(false, false);
-                    btFormatPrint.Close(BarTender.BtSaveOptions.btDoNotSaveChanges);
-                }
-                catch (Exception e)
-                {
-                    ShowPtSerMsg(Convert.ToString(e));
-                }
 
+                    ConstData.PrevCurrentPrinterMessage_1 = ConstData.CurrentPrinterMessage_1;
+                    ConstData.PrevCurrentPrinterMessage_2 = ConstData.CurrentPrinterMessage_2;
 
-                Thread.Sleep(50);
+                    ShowPtSerMsg("发送MES条码:" + _resMesCode);
+                    MixCilentCx.Send(string.Concat("S,", _resMesCode));
+                    Thread.Sleep(150);
 
-                ShowPtSerMsg("发送MES条码:" + ConstData.CurrentMesCode);
-                Thread.Sleep(100);
-                MixCilentCx.Send(string.Concat("S,", ConstData.CurrentMesCode));
-                ShowSerMsg("读取到打印状态码(GA)并发送:" + ConstData.CurrentPrinterMessage_1);
-                Thread.Sleep(50);
-                MixCilentCx.Send(string.Concat("S,", ConstData.CurrentMesCode));
-                Thread.Sleep(100);
-                MixCilentCx.Send(string.Concat("GA,", ConstData.CurrentPrinterMessage_1));
-                Thread.Sleep(150);
-                //阻塞线程1
-               
-                MixCilentCx.Send(string.Concat("L,1"));
-                Thread.Sleep(50);
-                MixCilentCx.Send(string.Concat("GA,", ConstData.CurrentPrinterMessage_1));
-                DbIns.SysDb.ExecuteSql("update mesprint set utm=current_timestamp,ptms=ptms+1,ptsts='" + ConstData.CurrentPrinterMessage_1 + "' where sn='" + ConstData.CurrentMesCode + "' and pts='" + _printer_1 + "';");
-            }
-            else if (str.Equals("3"))
-            {
-                ShowSerMsg("处理指令码:" + str + ",动作:GB打印机重复打印");
-                if (string.IsNullOrEmpty(ConstData.CurrentMesCode))
-                {
-                    ShowSerMsg("未找到上次发送的条码");
-                    return;
-                }
-                try
-                {
+                    ShowSerMsg("读取到打印状态码(GA)并发送:" + ConstData.CurrentPrinterMessage_1);
+
+                    Thread.Sleep(100);
+                    MixCilentCx.Send(string.Concat("GA,", ConstData.CurrentPrinterMessage_1));
+
+                    Thread.Sleep(100);
+                    //阻塞线程1
+                    MixCilentCx.Send(string.Concat("L,1"));
                     Thread.Sleep(50);
-                    BarTender.Format btFormatPrint2 = btApp.Formats.Open(_label_2, false, string.Empty);
-                    btFormatPrint2.PrintSetup.Printer = _printer_2;
-                    //btFormatPrint.PrintSetup.NumberSerializedLabels = 1;                
-                    btFormatPrint2.PrintSetup.IdenticalCopiesOfLabel = 1;
-                    btFormatPrint2.SetNamedSubStringValue("sn", ConstData.CurrentMesCode);
-                    btFormatPrint2.PrintOut(false, false);
-                    btFormatPrint2.Close(BarTender.BtSaveOptions.btDoNotSaveChanges);
+                    MixCilentCx.Send(string.Concat("GA,", ConstData.CurrentPrinterMessage_1));
+
+                    Thread.Sleep(100);
+                    ShowSerMsg("读取到打印状态码(GB)并发送:" + ConstData.CurrentPrinterMessage_2);
+                    Thread.Sleep(100);
+                    MixCilentCx.Send(string.Concat("GB,", ConstData.CurrentPrinterMessage_2));
+
+                    Thread.Sleep(150);
+                    //阻塞线程2
+
+                    MixCilentCx.Send(string.Concat("Z,2"));
+                    Thread.Sleep(50);
+                    MixCilentCx.Send(string.Concat("GB,", ConstData.CurrentPrinterMessage_2));
+                    //打印机出码时间
+                    TimeSpan ts4 = new TimeSpan(DateTime.Now.Ticks);
+                    DbIns.SysDb.ExecuteSql("insert into mesprint(sn,orderno,batchno,ptsts,pts) select sn,orderno,batchno,'" + ConstData.CurrentPrinterMessage_1 + "','" + _printer_1 + "' from messn where sn='" + _resMesCode + "';");
+                    DbIns.SysDb.ExecuteSql("insert into mesprint(sn,orderno,batchno,ptsts,pts) select sn,orderno,batchno,'" + ConstData.CurrentPrinterMessage_2 + "','" + _printer_2 + "' from messn where sn='" + _resMesCode + "';");
+                    DbIns.SysDb.ExecuteSql("delete from messn where sn='" + _resMesCode + "';");
+                    string pms = " and tm between '" + DateTime.Now.ToString("yyyy-MM-dd") + " 08:00:00' and '" + DateTime.Now.ToString("yyyy-MM-dd") + " 20:00:00' ";
+                    if (!CheckBb())
+                    {
+                        if (!ck_dis.Checked)
+                        {
+                            pms = " and tm between '" + DateTime.Now.ToString("yyyy-MM-dd") + " 20:00:00' and '" + DateTime.Now.ToString("yyyy-MM-dd") + " 23:59:59' ";
+                        }
+                        else
+                        {
+                            pms = " and tm between '" + DateTime.Now.AddDays(-1).ToString("yyyy-MM-dd") + " 20:00:00' and '" + DateTime.Now.ToString("yyyy-MM-dd") + " 08:00:00' ";
+                        }
+                    }
+                    DataTable _dtp = DbIns.SysDb.ExecuteSql("select 1 from mesprint where orderno='" + _currentOrderNo + "' " + pms + ";").Result as DataTable;
+                    DataTable _dtinner = DbIns.SysDb.ExecuteSql("select sn 条码,orderno 订单号 from messn where orderno='" + _currentOrderNo + "';").Result as DataTable;
+                    lb_yz.Text = (_dtp.Rows.Count / 2).ToString();
+                    lb_sy.Text = _dtinner.Rows.Count.ToString();
+                    if (tb_nbstop.Text == lb_yz.Text)
+                    {
+                        MessageBox.Show("已打印数量到达截止线", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        return;
+                    }
+                    //dgv_sytm.DataSource = _dtinner;
+                }
+                else if (str.Equals("2"))
+                {
+                    ShowSerMsg("处理指令码:" + str + ",动作:GA打印机重复打印");
+                    if (string.IsNullOrEmpty(ConstData.CurrentMesCode))
+                    {
+                        ShowSerMsg("未找到上次发送的条码");
+                        return;
+                    }
+                    try
+                    {
+                        //打印机1
+                        using (Engine engine = new Engine(true))
+                        {
+                            LabelFormatDocument btformat = engine.Documents.Open(_label_1);
+                            btformat.SubStrings["sn"].Value = ConstData.CurrentMesCode;
+                            btformat.PrintSetup.PrinterName = _printer_1;
+                            btformat.PrintSetup.IdenticalCopiesOfLabel = 1;
+                            Result result=  btformat.Print();
+                            btformat.Close(SaveOptions.DoNotSaveChanges);
+                            engine.Stop();
+                           
+                        }
+                        ShowPtSerMsg("A重复打印完成");
+                    }
+                    catch (Exception e)
+                    {
+                        ShowPtSerMsg(Convert.ToString(e));
+                    }
+
+
+                    Thread.Sleep(50);
+
+                    ShowPtSerMsg("发送MES条码:" + ConstData.CurrentMesCode);
+                    Thread.Sleep(100);
+                    MixCilentCx.Send(string.Concat("S,", ConstData.CurrentMesCode));
+                    ShowSerMsg("读取到打印状态码(GA)并发送:" + ConstData.CurrentPrinterMessage_1);
+                    Thread.Sleep(50);
+                    MixCilentCx.Send(string.Concat("S,", ConstData.CurrentMesCode));
+                    Thread.Sleep(100);
+                    MixCilentCx.Send(string.Concat("GA,", ConstData.CurrentPrinterMessage_1));
+                    Thread.Sleep(150);
+                    //阻塞线程1
+
+                    MixCilentCx.Send(string.Concat("L,1"));
+                    Thread.Sleep(50);
+                    MixCilentCx.Send(string.Concat("GA,", ConstData.CurrentPrinterMessage_1));
+                    DbIns.SysDb.ExecuteSql("update mesprint set utm=current_timestamp,ptms=ptms+1,ptsts='" + ConstData.CurrentPrinterMessage_1 + "' where sn='" + ConstData.CurrentMesCode + "' and pts='" + _printer_1 + "';");
+                }
+                else if (str.Equals("3"))
+                {
+                    ShowSerMsg("处理指令码:" + str + ",动作:GB打印机重复打印");
+                    if (string.IsNullOrEmpty(ConstData.CurrentMesCode))
+                    {
+                        ShowSerMsg("未找到上次发送的条码");
+                        return;
+                    }
+                    try
+                    {
+                        using (Engine engine = new Engine(true))
+                        {
+                            LabelFormatDocument btformat = engine.Documents.Open(_label_2);
+                            btformat.SubStrings["sn"].Value = ConstData.CurrentMesCode;
+                            btformat.PrintSetup.PrinterName = _printer_2;
+                            btformat.PrintSetup.IdenticalCopiesOfLabel = 1;
+                            btformat.Print();
+                            btformat.Close(SaveOptions.DoNotSaveChanges);
+                            engine.Stop();
+
+                        }
+                        ShowPtSerMsg("B重复打印完成");
+                    }
+                    catch (Exception e)
+                    {
+                        ShowPtSerMsg(Convert.ToString(e));
+                    }
+                    Thread.Sleep(50);
+
+                    ShowPtSerMsg("发送MES条码:" + ConstData.CurrentMesCode);
+                    MixCilentCx.Send(string.Concat("S,", ConstData.CurrentMesCode));
+                    Thread.Sleep(100);
+                    ShowSerMsg("读取到打印状态码(GB)并发送:" + ConstData.CurrentPrinterMessage_2);
+                    Thread.Sleep(50);
+                    MixCilentCx.Send(string.Concat("GB,", ConstData.CurrentPrinterMessage_2));
+
+                    Thread.Sleep(150);
+                    //阻塞线程2
+                    MixCilentCx.Send(string.Concat("Z,2"));
+                    Thread.Sleep(50);
+                    MixCilentCx.Send(string.Concat("GB,", ConstData.CurrentPrinterMessage_2));
+                    DbIns.SysDb.ExecuteSql("update mesprint set utm=current_timestamp,ptms=ptms+1,ptsts='" + ConstData.CurrentPrinterMessage_2 + "' where sn='" + ConstData.CurrentMesCode + "' and pts='" + _printer_2 + "';");
+                }
+                else if (str.Equals("4"))
+                {
+                    ShowSerMsg("处理指令码:" + str + ",动作:GA和GB打印机都重复打印");
+                    ShowSerMsg("GA打印中");
+                    if (string.IsNullOrEmpty(ConstData.CurrentMesCode))
+                    {
+                        ShowSerMsg("未找到上次发送的条码");
+                        return;
+                    }
+                    Thread.Sleep(50);
+                    using (Engine engine = new Engine(true))
+                    {
+                        LabelFormatDocument btformat = engine.Documents.Open(_label_1);
+                        btformat.SubStrings["sn"].Value = ConstData.CurrentPrinterMessage_1;
+                        btformat.PrintSetup.PrinterName = _printer_1;
+                        btformat.PrintSetup.IdenticalCopiesOfLabel = 1;
+                        btformat.Print();
+                        btformat.Close(SaveOptions.DoNotSaveChanges);
+                        engine.Stop();
+
+                    }
+                    ShowPtSerMsg("A重复打印完成");
+                    Thread.Sleep(30);
+                    //打印机2
+                    using (Engine engine = new Engine(true))
+                    {
+                        LabelFormatDocument btformat = engine.Documents.Open(_label_2);
+                        btformat.SubStrings["sn"].Value = ConstData.CurrentPrinterMessage_1;
+                        btformat.PrintSetup.PrinterName = _printer_2;
+                        btformat.PrintSetup.IdenticalCopiesOfLabel = 1;
+                        btformat.Print();
+                        btformat.Close(SaveOptions.DoNotSaveChanges);
+                        engine.Stop();
+
+                    }
                     ShowPtSerMsg("B重复打印完成");
+
+                    ShowPtSerMsg("发送MES条码:" + ConstData.CurrentMesCode);
+                    MixCilentCx.Send(string.Concat("S,", ConstData.CurrentMesCode));
+                    Thread.Sleep(100);
+                    ShowSerMsg("读取到打印状态码(GA)并发送:" + ConstData.CurrentPrinterMessage_1);
+                    MixCilentCx.Send(string.Concat("GA,", ConstData.CurrentPrinterMessage_1));
+                    Thread.Sleep(100);
+                    //阻塞线程1
+                    MixCilentCx.Send(string.Concat("L,1"));
+                    Thread.Sleep(50);
+                    MixCilentCx.Send(string.Concat("Z,2"));
+                    Thread.Sleep(50);
+
+                    MixCilentCx.Send(string.Concat("GA,", ConstData.CurrentPrinterMessage_1));
+                    ShowPtSerMsg("发送MES条码:" + ConstData.CurrentMesCode);
+                    MixCilentCx.Send(string.Concat("S,", ConstData.CurrentMesCode));
+                    ShowSerMsg("读取到打印状态码(GB)并发送:" + ConstData.CurrentPrinterMessage_2);
+                    Thread.Sleep(50);
+                    MixCilentCx.Send(string.Concat("GB,", ConstData.CurrentPrinterMessage_2));
+                    Thread.Sleep(150);
+                    MixCilentCx.Send(string.Concat("Z,2"));
+                    Thread.Sleep(50);
+                    MixCilentCx.Send(string.Concat("GB,", ConstData.CurrentPrinterMessage_2));
+                    DbIns.SysDb.ExecuteSql("update mesprint set utm=current_timestamp,ptms=ptms+1,ptsts='" + ConstData.CurrentPrinterMessage_1 + "' where sn='" + ConstData.CurrentMesCode + "' and pts='" + _printer_1 + "';");
+                    DbIns.SysDb.ExecuteSql("update mesprint set utm=current_timestamp,ptms=ptms+1,ptsts='" + ConstData.CurrentPrinterMessage_2 + "' where sn='" + ConstData.CurrentMesCode + "' and pts='" + _printer_2 + "';");
                 }
-                catch (Exception e)
+                else
                 {
-                    ShowPtSerMsg(Convert.ToString(e));
+                    ShowSerMsg("无效指令码:" + str + ",动作:丢弃");
                 }
-
-
-                Thread.Sleep(50);
-
-                ShowPtSerMsg("发送MES条码:" + ConstData.CurrentMesCode);
-                MixCilentCx.Send(string.Concat("S,", ConstData.CurrentMesCode));
-                Thread.Sleep(100);
-                ShowSerMsg("读取到打印状态码(GB)并发送:" + ConstData.CurrentPrinterMessage_2);
-                Thread.Sleep(50);
-                MixCilentCx.Send(string.Concat("GB,", ConstData.CurrentPrinterMessage_2));
-              
-                Thread.Sleep(150);
-                //阻塞线程2
-                MixCilentCx.Send(string.Concat("Z,2"));
-                Thread.Sleep(50);
-                MixCilentCx.Send(string.Concat("GB,", ConstData.CurrentPrinterMessage_2));
-                DbIns.SysDb.ExecuteSql("update mesprint set utm=current_timestamp,ptms=ptms+1,ptsts='" + ConstData.CurrentPrinterMessage_2 + "' where sn='" + ConstData.CurrentMesCode + "' and pts='" + _printer_2 + "';");
             }
-            else if (str.Equals("4"))
-            {
-                ShowSerMsg("处理指令码:" + str + ",动作:GA和GB打印机都重复打印");
-                ShowSerMsg("GA打印中");
-                if (string.IsNullOrEmpty(ConstData.CurrentMesCode))
-                {
-                    ShowSerMsg("未找到上次发送的条码");
-                    return;
-                }
-                Thread.Sleep(50);
-                BarTender.Format btFormatPrint = btApp.Formats.Open(_label_1, false, string.Empty);
-                btFormatPrint.PrintSetup.Printer = _printer_1;
-                btFormatPrint.SetNamedSubStringValue("sn", ConstData.CurrentMesCode);
-                btFormatPrint.PrintOut(false, false);
-                btFormatPrint.Close(BarTender.BtSaveOptions.btDoNotSaveChanges);
-                Thread.Sleep(100);
-                ShowPtSerMsg("A重复打印完成");
 
-                ShowPtSerMsg("发送MES条码:" + ConstData.CurrentMesCode);
-                MixCilentCx.Send(string.Concat("S,", ConstData.CurrentMesCode));
-                Thread.Sleep(100);
-                ShowSerMsg("读取到打印状态码(GA)并发送:" + ConstData.CurrentPrinterMessage_1);
-
-
-                MixCilentCx.Send(string.Concat("GA,", ConstData.CurrentPrinterMessage_1));
-                Thread.Sleep(100);
-                //阻塞线程1
-                MixCilentCx.Send(string.Concat("L,1"));
-                Thread.Sleep(50);
-                MixCilentCx.Send(string.Concat("GA,", ConstData.CurrentPrinterMessage_1));
-
-                ShowSerMsg("GB打印中");
-                if (string.IsNullOrEmpty(ConstData.CurrentMesCode))
-                {
-                    ShowSerMsg("未找到上次发送的条码");
-                    return;
-                }
-                Thread.Sleep(50);
-                BarTender.Format btFormatPrint2 = btApp.Formats.Open(_label_2, false, string.Empty);
-                btFormatPrint2.PrintSetup.Printer = _printer_2;
-                //btFormatPrint.PrintSetup.NumberSerializedLabels = 1;                
-                btFormatPrint2.PrintSetup.IdenticalCopiesOfLabel = 1;
-                btFormatPrint2.SetNamedSubStringValue("sn", ConstData.CurrentMesCode);
-                btFormatPrint2.PrintOut(false, false);
-                btFormatPrint2.Close(BarTender.BtSaveOptions.btDoNotSaveChanges);
-                ShowPtSerMsg("B重复打印完成");
-                Thread.Sleep(100);
-
-                ShowPtSerMsg("发送MES条码:" + ConstData.CurrentMesCode);
-                MixCilentCx.Send(string.Concat("S,", ConstData.CurrentMesCode));
-                ShowSerMsg("读取到打印状态码(GB)并发送:" + ConstData.CurrentPrinterMessage_2);
-                Thread.Sleep(50);
-                MixCilentCx.Send(string.Concat("GB,", ConstData.CurrentPrinterMessage_2));
-                Thread.Sleep(150);
-                //阻塞线程2
-               
-                MixCilentCx.Send(string.Concat("Z,2"));
-                Thread.Sleep(50);
-                MixCilentCx.Send(string.Concat("GB,", ConstData.CurrentPrinterMessage_2));
-                DbIns.SysDb.ExecuteSql("update mesprint set utm=current_timestamp,ptms=ptms+1,ptsts='" + ConstData.CurrentPrinterMessage_1 + "' where sn='" + ConstData.CurrentMesCode + "' and pts='" + _printer_1 + "';");
-                DbIns.SysDb.ExecuteSql("update mesprint set utm=current_timestamp,ptms=ptms+1,ptsts='" + ConstData.CurrentPrinterMessage_2 + "' where sn='" + ConstData.CurrentMesCode + "' and pts='" + _printer_2 + "';");
-            }
-            else
-            {
-                ShowSerMsg("无效指令码:" + str + ",动作:丢弃");
-            }
         }
 
         private void btn_connptser_Click(object sender, EventArgs e)
@@ -917,7 +931,7 @@ namespace CommTcper
                     return;
                 }
             }
-         
+
             _currentOrderNo = tb_gdh.Text;
             tb_gdh.Enabled = false;
             btn_qhgd.Enabled = true;
@@ -1031,11 +1045,8 @@ namespace CommTcper
             if (Dt == DialogResult.OK)
             {
                 e.Cancel = false;
-                btApp.Quit();
                 System.Environment.Exit(0);
                 //Process.GetCurrentProcess().Kill();
-                btApp.Quit(BarTender.BtSaveOptions.btSaveChanges);
-                this.Dispose();
             }
             else
             {
@@ -1124,7 +1135,7 @@ namespace CommTcper
             {
                 tb_serip.Enabled = tb_serport.Enabled = tb_ptserip.Enabled = tb_ptserport.Enabled = false;
                 bt_cancel.Enabled = true;
-                bt_clear.Enabled= button2.Enabled = bt_Rest.Enabled = btn_qdgd.Enabled = btn_connptser.Enabled = btn_dyjl.Enabled = true;
+                bt_clear.Enabled = button2.Enabled = bt_Rest.Enabled = btn_qdgd.Enabled = btn_connptser.Enabled = btn_dyjl.Enabled = true;
                 bt_connScan.Enabled = bt_connMo.Enabled = comboBox1.Enabled = tb_nbstop.Enabled = tb_gdh.Enabled = true;
                 bt_dlu.BackColor = System.Drawing.Color.Green;
             }
@@ -1138,7 +1149,7 @@ namespace CommTcper
                 MessageBox.Show("请先确定订单号", "警告", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
-            bt_clear.Enabled= comboBox1.Enabled = bt_Rest.Enabled = tb_nbstop.Enabled = tb_number.Enabled = tb_gdh.Enabled = tb_serip.Enabled = tb_serport.Enabled = tb_ptserip.Enabled = tb_ptserport.Enabled = false;
+            bt_clear.Enabled = comboBox1.Enabled = bt_Rest.Enabled = tb_nbstop.Enabled = tb_number.Enabled = tb_gdh.Enabled = tb_serip.Enabled = tb_serport.Enabled = tb_ptserip.Enabled = tb_ptserport.Enabled = false;
             button2.Enabled = bt_connMo.Enabled = bt_connScan.Enabled = button2.Enabled = bt_can.Enabled = comboBox1.Enabled = btn_dyjl.Enabled = bt_can.Enabled = btn_qdgd.Enabled = btn_connptser.Enabled = bt_cancel.Enabled = false;
             bt_dlu.BackColor = System.Drawing.Color.Transparent;
             Class2.__result = false;
@@ -1149,7 +1160,7 @@ namespace CommTcper
             InitApp();
             ModbusDataReadingLoopAsync();
             Orderinit();
-          
+
         }
         //新增
         private object obj = new object();

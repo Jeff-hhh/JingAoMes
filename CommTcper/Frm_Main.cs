@@ -186,6 +186,14 @@ namespace CommTcper
             {
                 ShowMsgScan("扫码枪连接失败！");
             }
+            if (CCDInit())
+            {
+                ShowMsgScan("线扫相机连接成功！");
+            }
+            else
+            {
+                ShowMsgScan("线扫相机连接失败！");
+            }
             sw1.Stop();
             Console.WriteLine("扫码枪客户端" + sw1.ElapsedMilliseconds.ToString());
             Task.Factory.StartNew(() =>
@@ -273,6 +281,7 @@ namespace CommTcper
                                 {
                                     ShowMsgScan("过账成功:" + getBarcode.msg);
                                     modbusTcp.WriteInt("7502", 1);
+                                    MixCilentCxPt.Send("OK"+ConstData.CurrenScanCode);
                                     DbIns.SysDb.ExecuteSql("update mesprint set workOrder='" + ConstData.CurrenScanCode + "'where sn='" + ConstData.CurrenScanCode + "';");
 
                                 }
@@ -338,6 +347,40 @@ namespace CommTcper
             catch (Exception ex)
             {
                 return -1;
+            }
+        }
+        //线扫相机通信
+        private bool CCDInit()
+        {
+            try
+            {
+                MixCilentCxPt.Init();
+                MixCilentCxPt.Connect(tb_CCDIP.Text, tb_CCDPort.Text);
+                Thread thread3 = new Thread(new ThreadStart(() => { while (true) CCDResult(MixCilentCxPt.Receive()); }));
+                thread3.IsBackground = true;
+                thread3.Start();
+                return true;
+             
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        private void CCDResult(string str)
+        {
+            if (string.IsNullOrEmpty(str))
+            {
+                ShowMsgScan("线扫相机通信异常");
+                return;
+            }
+            if (str.Equals("OK"))
+            {
+                ShowMsgScan("线扫相机回传成功");
+            }
+            if (!str.Equals("OK"))
+            {
+                ShowMsgScan("线扫相机回传指令无效" + str);
             }
         }
         //扫码枪客户端
